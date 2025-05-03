@@ -1,0 +1,4 @@
+# ninja log v6
+3	31	7679940252605993	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
+758	1041	7679935600004854	OpenCL_cryptography.exe	9c420100013184c
+34	757	7679935592771114	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	eb9a495d1fec651a
