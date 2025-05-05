@@ -1,4 +1,9 @@
 # ninja log v6
-3	31	7679940252605993	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
+4	32	7681452910461069	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
 758	1041	7679935600004854	OpenCL_cryptography.exe	9c420100013184c
-34	757	7679935592771114	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	eb9a495d1fec651a
+35	1068	7681446237051444	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	de7f67378e9bca47
+31	256	7681453634298353	build.ninja	6842aed53e58e233
+33	61	7681427189164337	clean	606cbfae7a854e6f
+4	31	7681453813052753	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
+35	1828	7681453813359643	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	c2c80ad0330895a2
+1829	2397	7681453831310415	OpenCL_cryptography.exe	ab917f8388b7c2d2

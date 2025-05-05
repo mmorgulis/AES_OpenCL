@@ -6,7 +6,6 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 
 # Nome progetto
 project(OpenCL_cryptography LANGUAGES CXX)
@@ -16,9 +15,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_PREFIX_PATH "D:/dev/vcpkg/installed/x64-windows/share/botan" CACHE PATH "Path to Botan CMake configuration")
-set(Botan_DIR "D:/dev/vcpkg/installed/x64-windows/share/botan")
-#find_package(Botan)
+#set(BOTAN_ROOT "D:/Botan-3.7.1/build_output")
+set(Botan_DIR "D:/Botan-3.7.1/build_output/lib/cmake/Botan-3.7.1")
+#include_directories(${BOTAN_ROOT}/include)
+#link_directories(${BOTAN_ROOT}/lib)
+
+find_package(Botan)
 
 # Aggiungi una libreria INTERFACE per OpenCL
 add_library(OpenCL INTERFACE)
@@ -37,7 +39,7 @@ add_executable(OpenCL_cryptography ${SOURCES} "src/tests.cpp")
 
 # Collega OpenCL
 target_link_libraries(OpenCL_cryptography PRIVATE OpenCL)
-#target_link_libraries(OpenCL_cryptography PRIVATE Botan)
+target_link_libraries(OpenCL_cryptography PRIVATE Botan::Botan-static)
 
 # Copia i kernels dopo la build
 add_custom_command(TARGET OpenCL_cryptography POST_BUILD
@@ -47,4 +49,7 @@ add_custom_command(TARGET OpenCL_cryptography POST_BUILD
 
 # Messaggio finale
 message(STATUS "OpenCL_cryptography configurato")
+message(STATUS "Version : ${Botan_VERSION}")
+message(STATUS "Found : ${Botan_FOUND}")
+
 

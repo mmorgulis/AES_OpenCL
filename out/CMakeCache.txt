@@ -17,6 +17,12 @@
 //The directory containing a CMake configuration file for Botan.
 Botan_DIR:PATH=Botan_DIR-NOTFOUND
 
+//Path to a file.
+Botan_INCLUDE_DIR:PATH=Botan_INCLUDE_DIR-NOTFOUND
+
+//Path to a library.
+Botan_LIBRARY:FILEPATH=Botan_LIBRARY-NOTFOUND
+
 //Path to a program.
 CMAKE_AR:FILEPATH=D:/VisualStudio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/lib.exe
 
@@ -187,6 +193,10 @@ OpenCL_cryptography_SOURCE_DIR:STATIC=D:/VisualStudio/repos/OpenCL_cryptography
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: Botan_INCLUDE_DIR
+Botan_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Botan_LIBRARY
+Botan_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created

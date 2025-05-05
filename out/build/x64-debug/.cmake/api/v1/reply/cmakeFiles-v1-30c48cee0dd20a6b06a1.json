@@ -106,6 +106,14 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Botan-3.7.1/build_output/lib/cmake/Botan-3.7.1/botan-config-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/Botan-3.7.1/build_output/lib/cmake/Botan-3.7.1/botan-config.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",

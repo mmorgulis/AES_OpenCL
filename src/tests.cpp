@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <vector>
 #include "utils/safe_allocator.hpp"
-#include <botan/hex.h>
+#include <botan/auto_rng.h>
 
 void safe_allocator_test() {
 	crypto::safe_vector<uint8_t> key;
