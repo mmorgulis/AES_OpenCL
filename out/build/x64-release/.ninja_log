@@ -1,0 +1,26 @@
+# ninja log v6
+4	30	7685695967130065	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+39	2394	7685695923992740	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	e7af040428ba46c5
+38	1742	7681615442854489	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	e9ed7c62ef647d28
+2394	2625	7685695947436095	OpenCL_cryptography.exe	bc451ebfdf4e0f0a
+42	54	7685695923348932	clean	606cbfae7a854e6f
+4	31	7685696209635724	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+32	44	7685696209937726	clean	606cbfae7a854e6f
+6	32	7685696210264065	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+37	2277	7685696210585135	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	e7af040428ba46c5
+2278	2475	7685696233037008	OpenCL_cryptography.exe	bc451ebfdf4e0f0a
+4	32	7685697096631819	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+33	45	7685697096949054	clean	606cbfae7a854e6f
+5	34	7685697097220747	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+39	2334	7685697097553063	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	e7af040428ba46c5
+2335	2615	7685697120518714	OpenCL_cryptography.exe	bc451ebfdf4e0f0a
+4	31	7685698599057483	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+32	44	7685698599294508	clean	606cbfae7a854e6f
+4	31	7685698623701868	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+32	43	7685698624004532	clean	606cbfae7a854e6f
+6	31	7685698624305983	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+36	2295	7685698624607664	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	e7af040428ba46c5
+2295	2470	7685698647188626	OpenCL_cryptography.exe	bc451ebfdf4e0f0a
+5	31	7685711057279125	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+36	2288	7685711057579789	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	e7af040428ba46c5
+2289	2490	7685711080126310	OpenCL_cryptography.exe	bc451ebfdf4e0f0a

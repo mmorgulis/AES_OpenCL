@@ -14,27 +14,11 @@
 # EXTERNAL cache entries
 ########################
 
-//The directory containing a CMake configuration file for Botan2.
-Botan2_DIR:PATH=Botan2_DIR-NOTFOUND
-
 //The directory containing a CMake configuration file for Botan.
 Botan_DIR:PATH=Botan_DIR-NOTFOUND
 
-//Path to a file.
-Botan_INCLUDE_DIR:PATH=Botan_INCLUDE_DIR-NOTFOUND
-
-//Path to a library.
-Botan_LIBRARY:FILEPATH=Botan_LIBRARY-NOTFOUND
-
-//Path to a library.
-Botan_STATIC_LIBRARY:FILEPATH=Botan_STATIC_LIBRARY-NOTFOUND
-
 //Path to a program.
 CMAKE_AR:FILEPATH=D:/VisualStudio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/lib.exe
-
-//For backwards compatibility, what version of CMake commands and
-// syntax should this version of CMake try to support.
-CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
 
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
@@ -116,9 +100,6 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 //Path to a program.
 CMAKE_MT:FILEPATH=D:/Windows Kits/10/bin/10.0.22621.0/x64/mt.exe
 
-//Path to Botan CMake configuration
-CMAKE_PREFIX_PATH:PATH=D:/dev/vcpkg/installed/x64-windows/share/botan
-
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
 
@@ -193,20 +174,11 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 // during RELWITHDEBINFO builds.
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
-//Vcpkg toolchain file
-CMAKE_TOOLCHAIN_FILE:STRING=C:/percorso/a/vcpkg/scripts/buildsystems/vcpkg.cmake
-
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
-
-//Single output directory for building all executables.
-EXECUTABLE_OUTPUT_PATH:PATH=
-
-//Single output directory for building all libraries.
-LIBRARY_OUTPUT_PATH:PATH=
 
 //Value Computed by CMake
 OpenCL_cryptography_BINARY_DIR:STATIC=D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug
@@ -217,29 +189,11 @@ OpenCL_cryptography_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 OpenCL_cryptography_SOURCE_DIR:STATIC=D:/VisualStudio/repos/OpenCL_cryptography
 
-//Arguments to supply to pkg-config
-PKG_CONFIG_ARGN:STRING=
-
-//pkg-config executable
-PKG_CONFIG_EXECUTABLE:FILEPATH=PKG_CONFIG_EXECUTABLE-NOTFOUND
-
-//The directory containing a CMake configuration file for botan.
-botan_DIR:PATH=botan_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for otan.
-otan_DIR:PATH=otan_DIR-NOTFOUND
-
 
 ########################
 # INTERNAL cache entries
 ########################
 
-//ADVANCED property for variable: Botan_INCLUDE_DIR
-Botan_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: Botan_LIBRARY
-Botan_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: Botan_STATIC_LIBRARY
-Botan_STATIC_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created
@@ -358,8 +312,4 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PKG_CONFIG_ARGN
-PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
-PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 

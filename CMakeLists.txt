@@ -15,12 +15,14 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-#set(BOTAN_ROOT "D:/Botan-3.7.1/build_output")
-set(Botan_DIR "D:/Botan-3.7.1/build_output/lib/cmake/Botan-3.7.1")
-#include_directories(${BOTAN_ROOT}/include)
-#link_directories(${BOTAN_ROOT}/lib)
+if(NOT DEFINED ENV{Botan_DIR})
+  message(FATAL_ERROR "La variabile d'ambiente 'Botan_DIR' non è definita.")
+endif()
+set(Botan_DIR "$ENV{Botan_DIR}")
 
-find_package(Botan)
+find_package(Botan REQUIRED)
+#message(STATUS "Prefix ${_Botan_PREFIX}")
+#message(STATUS "Lib ${_Botan_shared_lib}")
 
 # Aggiungi una libreria INTERFACE per OpenCL
 add_library(OpenCL INTERFACE)
@@ -35,17 +37,33 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 )
 
 # Crea l'eseguibile
-add_executable(OpenCL_cryptography ${SOURCES} "src/tests.cpp")
+add_executable(OpenCL_cryptography ${SOURCES} "src/host.cpp")
 
 # Collega OpenCL
 target_link_libraries(OpenCL_cryptography PRIVATE OpenCL)
-target_link_libraries(OpenCL_cryptography PRIVATE Botan::Botan-static)
+target_link_libraries(OpenCL_cryptography PRIVATE Botan::Botan)
 
-# Copia i kernels dopo la build
+# Imposta una variabile per il path alla DLL
+if(NOT DEFINED ENV{Botan_LIB})
+  message(FATAL_ERROR "La variabile d'ambiente 'Botan_LIB' non è definita.")
+endif()
+
+set(BOTAN_DLL_PATH "$ENV{Botan_LIB}/botan-3.dll")
+
+if(NOT EXISTS "${BOTAN_DLL_PATH}")
+  message(FATAL_ERROR "File DLL non trovato: ${BOTAN_DLL_PATH}")
+endif()
+
+# Copia i kernels e il dll dopo la build
 add_custom_command(TARGET OpenCL_cryptography POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${BOTAN_DLL_PATH}"
+            $<TARGET_FILE_DIR:OpenCL_cryptography>
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_SOURCE_DIR}/kernels $<TARGET_FILE_DIR:OpenCL_cryptography>/kernels
+            ${CMAKE_SOURCE_DIR}/kernels
+            $<TARGET_FILE_DIR:OpenCL_cryptography>/kernels
 )
+
 
 # Messaggio finale
 message(STATUS "OpenCL_cryptography configurato")

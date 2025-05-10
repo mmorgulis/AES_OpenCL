@@ -37,11 +37,11 @@ struct safe_allocator {
 		if (n > std::numeric_limits<std::size_t>::max() / sizeof(T)) {
 			throw std::bad_alloc();
 		}
-
+		/*
 		#ifndef NDEBUG
-		std::cout << "Allocated " << n * sizeof(T) << " bytes" << std::endl;
+		std::cout << "Allocated " << n * sizeof(T) << " bytes\n";
 		#endif
-
+		*/
 		return static_cast<T*>(::operator new(n * sizeof(T)));	
 	}
 
@@ -51,10 +51,11 @@ struct safe_allocator {
 			secure_clean_memory(p, n * sizeof(T)); 
 			::operator delete(p);
 		}
-
+		/*
 		#ifndef NDEBUG
-		std::cout << "Deallocated memory" << std::endl;
+		std::cout << "Deallocated memory\n";
 		#endif 
+		*/
 	}
 
 	// Useful to put object into allocated memory
@@ -63,20 +64,22 @@ struct safe_allocator {
 	template<typename U, typename... Args>
 	void construct(U* p, Args&&... args) {
 		new(p) U(std::forward<Args>(args)...);
-		
+		/*
 		#ifndef NDEBUG
 		std::cout << "Construct element" << std::endl;
 		#endif
+		*/
 	}
 
 	// Cleaning up object without cleaning up memory
 	template<typename U>
 	void destroy(U* p) noexcept {
 		p->~U();
-
+		/*
 		#ifndef NDEBUG
 		std::cout << "Destroy element" << std::endl;
 		#endif
+		*/
 	}
 
 	void secure_clean_memory(void* p, size_t num_bytes) {
@@ -87,7 +90,7 @@ struct safe_allocator {
 		}
 		// No compiler optimization
 		std::atomic_thread_fence(std::memory_order_seq_cst);
-
+		/*
 		#ifndef NDEBUG
 		std::cout << "Clean memory" << std::endl;
 		const unsigned char* check = reinterpret_cast<const unsigned char*>(p);
@@ -97,6 +100,7 @@ struct safe_allocator {
 			}
 		}
 		#endif
+		*/
 	}
 
 };

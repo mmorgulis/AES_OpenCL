@@ -5,7 +5,7 @@ events:
     kind: "message-v1"
     backtrace:
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake:205 (message)"
-      - "CMakeLists.txt:10 (project)"
+      - "CMakeLists.txt:11 (project)"
     message: |
       The system is: Windows - 10.0.22631 - AMD64
   -
@@ -14,7 +14,7 @@ events:
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:10 (project)"
+      - "CMakeLists.txt:11 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
       Compiler: D:/VisualStudio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/cl.exe 
@@ -47,7 +47,7 @@ events:
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1243 (message)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:10 (project)"
+      - "CMakeLists.txt:11 (project)"
     message: |
       Detecting CXX compiler /showIncludes prefix:
         main.c
@@ -59,12 +59,12 @@ events:
     backtrace:
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:10 (project)"
+      - "CMakeLists.txt:11 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-ed9wnf"
-      binary: "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-ed9wnf"
+      source: "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-hcg5fw"
+      binary: "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-hcg5fw"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Ob0 /Od /RTC1"
@@ -75,11 +75,11 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-ed9wnf'
+        Change Dir: 'D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-hcg5fw'
         
-        Run Build Command(s): D:\\VISUALSTUDIO\\2022\\COMMUNITY\\COMMON7\\IDE\\COMMONEXTENSIONS\\MICROSOFT\\CMAKE\\Ninja\\ninja.exe -v cmTC_515ff
-        [1/2] D:\\VisualStudio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Ob0 /Od /RTC1 -Zi /showIncludes /FoCMakeFiles\\cmTC_515ff.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_515ff.dir\\ /FS -c D:\\VisualStudio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.30\\Modules\\CMakeCXXCompilerABI.cpp
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\VisualStudio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_515ff.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- D:\\VisualStudio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_515ff.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_515ff.exe /implib:cmTC_515ff.lib /pdb:cmTC_515ff.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        Run Build Command(s): D:\\VISUALSTUDIO\\2022\\COMMUNITY\\COMMON7\\IDE\\COMMONEXTENSIONS\\MICROSOFT\\CMAKE\\Ninja\\ninja.exe -v cmTC_9c9a0
+        [1/2] D:\\VisualStudio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Ob0 /Od /RTC1 -Zi /showIncludes /FoCMakeFiles\\cmTC_9c9a0.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_9c9a0.dir\\ /FS -c D:\\VisualStudio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.30\\Modules\\CMakeCXXCompilerABI.cpp
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\VisualStudio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_9c9a0.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- D:\\VisualStudio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_9c9a0.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_9c9a0.exe /implib:cmTC_9c9a0.lib /pdb:cmTC_9c9a0.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
         
       exitCode: 0
   -
@@ -87,7 +87,7 @@ events:
     backtrace:
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:10 (project)"
+      - "CMakeLists.txt:11 (project)"
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
@@ -105,7 +105,7 @@ events:
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
       - "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:10 (project)"
+      - "CMakeLists.txt:11 (project)"
     message: |
       Running the CXX compiler's linker: "D:/VisualStudio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/link.exe" "-v"
       Microsoft (R) Incremental Linker Version 14.43.34810.0
