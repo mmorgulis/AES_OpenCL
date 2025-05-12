@@ -37,7 +37,7 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 )
 
 # Crea l'eseguibile
-add_executable(OpenCL_cryptography ${SOURCES} "src/host.cpp")
+add_executable(OpenCL_cryptography ${SOURCES} "src/host.cpp"  "src/utils/sbox.h" "src/utils/key_expansion.h" "src/utils/key_expansion.cpp")
 
 # Collega OpenCL
 target_link_libraries(OpenCL_cryptography PRIVATE OpenCL)

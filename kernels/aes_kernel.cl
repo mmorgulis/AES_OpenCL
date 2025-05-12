@@ -39,7 +39,3 @@ __kernel void decrypt_n(__global uint8 *input, uint8 num_blocks, __global uint8 
 
 
 }
-
-__kernel void key_derivation_funct(__global uint8 *key, __global uint8 *round_key) {
-
-}

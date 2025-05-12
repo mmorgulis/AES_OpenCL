@@ -63,6 +63,9 @@ static bool find_platforms(cl::Platform &platform_chosen, cl::Device &device_cho
 	}
 }
 
+
+
+
 int main() {
 	// OpenCL platforms and devices
 	cl::Platform platform;
@@ -80,16 +83,31 @@ int main() {
 
 	// Macro definition for key length
 	unsigned int key_length = 32; //Default key length
+	unsigned int num_round_keys = 15; //Rounds key for AES-256
 	std::cout << "Pick the key length between 16, 24, 32\n";
 	std::cin >> key_length;
 
 	std::string aes_version_define;
 	switch (key_length) {
-	case 16: aes_version_define = "-DAES_128"; break;
-	case 24: aes_version_define = "-DAES_192"; break;
-	case 32: aes_version_define = "-DAES_256"; break;
-	default: std::cout << "Unsupported Key Length \n"; return -1;
+	case 16: 
+		aes_version_define = "-DAES_128"; 
+		num_round_keys = 11;
+		break;
+	case 24: 
+		aes_version_define = "-DAES_192"; 
+		num_round_keys = 13; 
+		break;
+	case 32: 
+		aes_version_define = "-DAES_256"; 
+		break;
+	default: 
+		std::cout << "Unsupported Key Length \n"; 
+		return -1;
 	}
+
+	// Bytes for round_keys array
+	unsigned int round_keys_size = num_round_keys * key_length; // bytes
+	crypto::safe_vector<uint8_t> round_keys(num_round_keys);
 	
 	// Generate key
 	std::unique_ptr<Botan::RandomNumberGenerator> rng;
@@ -110,9 +128,7 @@ int main() {
 	}
 	std::cout << '\n'; 
 	*/
-
-	// OpenCL Buffers for the keys
-	cl::Buffer key_buf(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, aes_key.size(), aes_key.data());
+	key_schedule(aes_key, round_keys);
 
 	// Program
 	// Load source code
@@ -128,8 +144,25 @@ int main() {
 	cl_int err_pr = program.build({device}, aes_version_define.c_str());
 
 	// Create kernels for specific functions
+	/*
 	cl::Kernel round_key_gen(program, "key_derivation_funct");
+	// OpenCL Buffers for the key
+	cl::Buffer key_buf(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, aes_key.size(), aes_key.data());
+	cl::Buffer round_keys_buf(context, CL_MEM_READ_WRITE, round_keys_size);
+	// Kernel functor
+	cl::KernelFunctor<cl::Buffer, cl::Buffer> key_expander(round_key_gen);
+	// Execute the function
+	size_t global_work_size = round_keys_size; // parallel work
+	key_expander(cl::EnqueueArgs(queue, cl::NDRange(global_work_size)), key_buf, round_keys_buf);
+	// Read data
+	queue.enqueueReadBuffer(round_keys_buf, CL_TRUE, 0, round_keys_size, round_keys.data());
+	*/
+
+
 	cl::Kernel encrypt(program, "encrypt_n");
+	
+	
+	
 	cl::Kernel decrypt(program, "decrypt_n");
 	
 

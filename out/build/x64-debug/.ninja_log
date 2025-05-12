@@ -1,16 +1,6 @@
 # ninja log v6
-4	34	7685791839522315	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
-2511	2943	7685791864592206	OpenCL_cryptography.exe	10695d90164f49aa
-35	1680	7681513749764887	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	c2c80ad0330895a2
-39	2510	7685791839854554	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	fb7fd8dc86540bf0
-33	45	7685744725615850	clean	606cbfae7a854e6f
-4	31	7685880027587741	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
-36	2528	7685880027898507	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	fb7fd8dc86540bf0
-2528	2971	7685880052822458	OpenCL_cryptography.exe	10695d90164f49aa
-4	30	7685880291580498	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
-8	38	7685924994417057	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
-43	2822	7685924994734891	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	fb7fd8dc86540bf0
-2823	4260	7685925022603874	OpenCL_cryptography.exe	10695d90164f49aa
 4	34	7685931652300509	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
-39	2549	7685931652621306	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	fb7fd8dc86540bf0
 2549	3083	7685931677708436	OpenCL_cryptography.exe	10695d90164f49aa
+35	1680	7681513749764887	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	c2c80ad0330895a2
+39	2549	7685931652621306	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	fb7fd8dc86540bf0
+33	45	7685744725615850	clean	606cbfae7a854e6f
