@@ -13,9 +13,11 @@
 #include <vector>
 
 #include "utils/safe_allocator.hpp"
+#include "utils/aes_core.h"
+#include "utils/cxxopts.hpp"
 
 // Fill devices_choosen if the function find a device
-static bool find_platforms(cl::Platform &platform_chosen, cl::Device &device_chosen) noexcept{
+bool find_platforms(cl::Platform &platform_chosen, cl::Device &device_chosen) noexcept{
 	std::vector<cl::Platform> platforms;
 	std::vector<cl::Device> devices;
 	cl_int res = cl::Platform::get(&platforms);
@@ -64,29 +66,16 @@ static bool find_platforms(cl::Platform &platform_chosen, cl::Device &device_cho
 }
 
 
-
-
-int main() {
-	// OpenCL platforms and devices
-	cl::Platform platform;
-	cl::Device device;
-	if (!find_platforms(platform, device)) {
-		std::cout << "No platforms detected\n";
-		return -1;
-	}
-	std::cout << "Platform chosen: " << platform.getInfo<CL_PLATFORM_NAME>() << "\n";
-	std::cout << "Device chosen: " << device.getInfo<CL_DEVICE_NAME>() << "\n";
-
-	// Context
-	cl::Context context(device);
-	cl::CommandQueue queue(context, device);
+int main(int argc, char * argv[]) {
+	// Take the key length as input argument
+	cxxopts::Options options("OpenCL_cryptography", "AES implementation");
+	options.add_options()
+		("k,key-length", "Key length", cxxopts::value<int>());
+	auto result = options.parse(argc, argv);
+	unsigned int key_length = result["key-length"].as<int>();
 
 	// Macro definition for key length
-	unsigned int key_length = 32; //Default key length
 	unsigned int num_round_keys = 15; //Rounds key for AES-256
-	std::cout << "Pick the key length between 16, 24, 32\n";
-	std::cin >> key_length;
-
 	std::string aes_version_define;
 	switch (key_length) {
 	case 16: 
@@ -128,7 +117,22 @@ int main() {
 	}
 	std::cout << '\n'; 
 	*/
-	key_schedule(aes_key, round_keys);
+	key_schedule(aes_key, round_keys, key_length);
+
+
+	// OpenCL platforms and devices
+	cl::Platform platform;
+	cl::Device device;
+	if (!find_platforms(platform, device)) {
+		std::cout << "No platforms detected\n";
+		return -1;
+	}
+	std::cout << "Platform chosen: " << platform.getInfo<CL_PLATFORM_NAME>() << "\n";
+	std::cout << "Device chosen: " << device.getInfo<CL_DEVICE_NAME>() << "\n";
+
+	// Context
+	cl::Context context(device);
+	cl::CommandQueue queue(context, device);
 
 	// Program
 	// Load source code

@@ -33,11 +33,16 @@ target_link_libraries(OpenCL INTERFACE ${CMAKE_SOURCE_DIR}/lib/OpenCL.lib)
 
 # Colleziona i sorgenti
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
-    src/*.cpp
-)
+    "src/*.cpp"
+    "src/*.hpp"
+    "src/*.h"
+    "include/*.cpp"
+    "include/*.hpp"
+    "include/*.h"
+)   
 
 # Crea l'eseguibile
-add_executable(OpenCL_cryptography ${SOURCES} "src/host.cpp"  "src/utils/sbox.h" "src/utils/key_expansion.h" "src/utils/key_expansion.cpp")
+add_executable(OpenCL_cryptography ${SOURCES} "src/host.cpp"  "src/utils/aes_core.h"   "src/utils/aes_core.cpp")
 
 # Collega OpenCL
 target_link_libraries(OpenCL_cryptography PRIVATE OpenCL)

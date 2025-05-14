@@ -3,10 +3,95 @@
 cmake_policy(SET CMP0009 NEW)
 
 # SOURCES at CMakeLists.txt:35 (file)
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/include/*.cpp")
+set(OLD_GLOB
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs")
+endif()
+
+# SOURCES at CMakeLists.txt:35 (file)
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/include/*.h")
+set(OLD_GLOB
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Context.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Error.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/ErrorCodes.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Event.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/File.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/OpenCLUtilsCpp_Export.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/OpenCLUtils_Export.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Utils.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_d3d10.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_d3d11.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_dx9_media_sharing.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_dx9_media_sharing_intel.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_egl.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_ext.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_ext_intel.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_function_types.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_gl.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_gl_ext.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_half.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_icd.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_layer.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_platform.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_va_api_media_sharing_intel.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl_version.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/opencl.h"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs")
+endif()
+
+# SOURCES at CMakeLists.txt:35 (file)
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/include/*.hpp")
+set(OLD_GLOB
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Context.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Detail.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Device.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Error.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Event.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/File.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/InteropContext.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Platform.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Utils.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl2.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/opencl.hpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/include/cxxopts.hpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs")
+endif()
+
+# SOURCES at CMakeLists.txt:35 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.cpp")
 set(OLD_GLOB
   "D:/VisualStudio/repos/OpenCL_cryptography/src/host.cpp"
-  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/key_expansion.cpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.cpp"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs")
+endif()
+
+# SOURCES at CMakeLists.txt:35 (file)
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.h")
+set(OLD_GLOB
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.h"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  file(TOUCH_NOCREATE "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs")
+endif()
+
+# SOURCES at CMakeLists.txt:35 (file)
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.hpp")
+set(OLD_GLOB
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/safe_allocator.hpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

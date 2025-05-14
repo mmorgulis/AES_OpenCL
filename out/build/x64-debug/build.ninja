@@ -57,7 +57,7 @@ build CMakeFiles\OpenCL_cryptography.dir\src\host.cpp.obj: CXX_COMPILER__OpenCL_
   TARGET_COMPILE_PDB = CMakeFiles\OpenCL_cryptography.dir\
   TARGET_PDB = OpenCL_cryptography.pdb
 
-build CMakeFiles\OpenCL_cryptography.dir\src\utils\key_expansion.cpp.obj: CXX_COMPILER__OpenCL_cryptography_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\utils\key_expansion.cpp || cmake_object_order_depends_target_OpenCL_cryptography
+build CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_core.cpp.obj: CXX_COMPILER__OpenCL_cryptography_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_core.cpp || cmake_object_order_depends_target_OpenCL_cryptography
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
   INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
   OBJECT_DIR = CMakeFiles\OpenCL_cryptography.dir
@@ -73,7 +73,7 @@ build CMakeFiles\OpenCL_cryptography.dir\src\utils\key_expansion.cpp.obj: CXX_CO
 #############################################
 # Link the executable OpenCL_cryptography.exe
 
-build OpenCL_cryptography.exe: CXX_EXECUTABLE_LINKER__OpenCL_cryptography_Debug CMakeFiles\OpenCL_cryptography.dir\src\host.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\key_expansion.cpp.obj | D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib
+build OpenCL_cryptography.exe: CXX_EXECUTABLE_LINKER__OpenCL_cryptography_Debug CMakeFiles\OpenCL_cryptography.dir\src\host.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_core.cpp.obj | D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = D:\Botan-3.8.1\build-output\lib\botan-3.lib  D:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
