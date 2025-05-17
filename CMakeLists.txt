@@ -42,7 +42,7 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 )   
 
 # Crea l'eseguibile
-add_executable(OpenCL_cryptography ${SOURCES} "src/host.cpp"  "src/utils/aes_core.h"   "src/utils/aes_core.cpp")
+add_executable(OpenCL_cryptography ${SOURCES} "src/test_main.cpp"  "src/utils/aes_core.h"   "src/utils/aes_core.cpp" "src/utils/aes_host.h" "src/utils/aes_host.cpp")
 
 # Collega OpenCL
 target_link_libraries(OpenCL_cryptography PRIVATE OpenCL)

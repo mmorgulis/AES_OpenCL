@@ -2,6 +2,7 @@
 #define AES_CORE_H
 
 #include <cstdint>
+#include <string>
 #include "safe_allocator.hpp"
 
 /*
@@ -82,12 +83,20 @@ inline constexpr uint8_t Inv_SBox[256] = {
 };
 
 
-inline constexpr uint8_t Rcon[10] = {
+inline constexpr uint8_t Rcon[15] = {
     0x01, 0x02, 0x04, 0x08,
     0x10, 0x20, 0x40, 0x80,
-    0x1B, 0x36
+    0x1B, 0x36, 0x6C, 0xD8, 
+    0xAB, 0x4D
 };
 
+// Initiliaze (globally with inline) common used variables with default values
+inline unsigned int key_length = 256;
+inline unsigned int num_rounds = 14;
+inline unsigned int num_round_keys = 15; // num_rounds + 1
+inline std::string aes_version_define = "-DAES_256";
+
+void generate_aes_key(crypto::safe_vector<uint8_t> &aes_key, crypto::safe_vector<uint8_t> &round_keys);
 
 /*
 * @brief Function to create round keys
@@ -102,10 +111,18 @@ inline constexpr uint8_t Rcon[10] = {
 * The function return void but fill the round_keys vector
 *		
 */
-void key_schedule(crypto::safe_vector<uint8_t>& key, crypto::safe_vector<uint8_t>& round_keys, 
-                    unsigned int key_length);
+void key_schedule(crypto::safe_vector<uint8_t>& key, crypto::safe_vector<uint8_t>& round_keys);
 
-void schedule_core(std::array<uint8_t, 4> t, unsigned int num_round);
+/*
+* @brief Support function of key_schedule
+* It does most of the maths computation (rotation, subword, rcon)
+*/
+void schedule_core(std::array<uint8_t, 4>& t, unsigned int num_curr_round);
 
+/*
+* @brief Support function of schedule_core 
+* It does the rotation of a for byte array
+*/
+void rotate(std::array<uint8_t, 4>& t);
 
 #endif // !AES_CORE_H

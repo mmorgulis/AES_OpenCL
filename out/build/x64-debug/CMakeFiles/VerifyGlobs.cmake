@@ -60,7 +60,6 @@ set(OLD_GLOB
   "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/Utils/Utils.hpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/cl2.hpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/include/CL/opencl.hpp"
-  "D:/VisualStudio/repos/OpenCL_cryptography/include/cxxopts.hpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -70,8 +69,9 @@ endif()
 # SOURCES at CMakeLists.txt:35 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.cpp")
 set(OLD_GLOB
-  "D:/VisualStudio/repos/OpenCL_cryptography/src/host.cpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/test_main.cpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.cpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -82,6 +82,7 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.h")
 set(OLD_GLOB
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -91,6 +92,7 @@ endif()
 # SOURCES at CMakeLists.txt:35 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.hpp")
 set(OLD_GLOB
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/cxxopts.hpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/safe_allocator.hpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

@@ -1,6 +1,16 @@
 # ninja log v6
-4	34	7685931652300509	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
-2549	3083	7685931677708436	OpenCL_cryptography.exe	10695d90164f49aa
+5	33	7691982445118018	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
+3185	3717	7691980715952359	OpenCL_cryptography.exe	46fba28886001208
 35	1680	7681513749764887	CMakeFiles/OpenCL_cryptography.dir/src/tests.cpp.obj	c2c80ad0330895a2
-39	2549	7685931652621306	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	fb7fd8dc86540bf0
-33	45	7685744725615850	clean	606cbfae7a854e6f
+47	1712	7691980684631164	CMakeFiles/OpenCL_cryptography.dir/src/utils/aes_core.cpp.obj	9ad2d8cabc01b180
+358	4226	7691752158769209	CMakeFiles/OpenCL_cryptography.dir/src/host.cpp.obj	fb7fd8dc86540bf0
+34	47	7691982445308910	clean	606cbfae7a854e6f
+135	629	7691973319483139	build.ninja	6842aed53e58e233
+54	2440	7691980684631164	CMakeFiles/OpenCL_cryptography.dir/src/utils/aes_host.cpp.obj	8d01b2b587ef335a
+41	3185	7691980684570579	CMakeFiles/OpenCL_cryptography.dir/src/test_main.cpp.obj	efaedf93a75f58fb
+7	36	7691982445719838	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
+47	1742	7691982446110740	CMakeFiles/OpenCL_cryptography.dir/src/utils/aes_core.cpp.obj	9ad2d8cabc01b180
+54	2481	7691982446110740	CMakeFiles/OpenCL_cryptography.dir/src/utils/aes_host.cpp.obj	8d01b2b587ef335a
+41	3205	7691982446020671	CMakeFiles/OpenCL_cryptography.dir/src/test_main.cpp.obj	efaedf93a75f58fb
+3205	3595	7691982477611942	OpenCL_cryptography.exe	46fba28886001208
+5	32	7691982500821037	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/CMakeFiles/cmake.verify_globs	31240aaeb02c57d4
