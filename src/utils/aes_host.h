@@ -15,7 +15,8 @@ inline cl::Device device;
 bool find_platforms(cl::Platform& platform_chosen, cl::Device& device_chosen) noexcept;
 
 // Communicates with OpenCL to encrypt
-void aes_encrypt(crypto::safe_vector<uint8_t> plain_text, crypto::safe_vector<uint8_t> cipher_text);
+void aes_encrypt(crypto::safe_vector<uint8_t>& plain_text, crypto::safe_vector<uint8_t>& cipher_text,
+	std::span<const uint8_t> round_key);
 
 // Communicates with OpenCL to encrypt
 void aes_decrypt(crypto::safe_vector<uint8_t> plain_text, crypto::safe_vector<uint8_t> cipher_text);

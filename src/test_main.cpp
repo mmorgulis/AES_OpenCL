@@ -37,10 +37,8 @@ int main(int argc, char * argv[]) {
 		throw std::runtime_error("Unsupported Key Length"); 
 	}
 	crypto::safe_vector<uint8_t> plain_text = {
-		0x6b, 0xc1, 0xbe, 0xe2,
-		0x2e, 0x40, 0x9f, 0x96,
-		0xe9, 0x3d, 0x7e, 0x11,
-		0x73, 0x93, 0x17, 0x2a
+		0x6b, 0xc1, 0xbe, 0xe2, 0x2e, 0x40, 0x9f, 0x96,
+		0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a
 	};
 	
 	crypto::safe_vector<uint8_t> cipher_text;
@@ -56,13 +54,12 @@ int main(int argc, char * argv[]) {
 
 	// Generate AES keys
 	generate_aes_key(aes_key, round_keys);
-
 	/*
 	// Print key
 	for (uint8_t byte : aes_key) {
 		std::cout << std::hex << static_cast<int>(byte) << " ";
 	}
-	std::cout << '\n'; 
+	std::cout << '\n'; */
 
 	// Print round keys
 	int i = 0;
@@ -74,18 +71,22 @@ int main(int argc, char * argv[]) {
 		++i;
 	}
 	std::cout << std::endl;
-	*/
+	
 
 	if (!find_platforms(platform, device)) {
 		throw std::runtime_error("No platforms detected");
 	}
-	
 	/*
 	// Print device
 	std::cout << "Platform chosen: " << platform.getInfo<CL_PLATFORM_NAME>() << "\n";
 	std::cout << "Device chosen: " << device.getInfo<CL_DEVICE_NAME>() << "\n";
 	*/
 
+	aes_encrypt(plain_text, cipher_text, round_keys);
+	for (uint8_t byte : cipher_text) {
+		std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)byte << " ";
+	}
+	std::cout << std::dec << std::endl;
 	return 0;
 
 }

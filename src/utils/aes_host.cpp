@@ -11,6 +11,7 @@
 #include "aes_core.h"
 #include "aes_host.h"
 #include "safe_allocator.hpp"
+#include <span>
 
 bool find_platforms(cl::Platform& platform_chosen, cl::Device& device_chosen) noexcept {
 	std::vector<cl::Platform> platforms;
@@ -60,16 +61,15 @@ bool find_platforms(cl::Platform& platform_chosen, cl::Device& device_chosen) no
 	}
 }
 
-void aes_encrypt(crypto::safe_vector<uint8_t> plain_text, crypto::safe_vector<uint8_t> cipher_text) {
-	unsigned int num_blocks = plain_text.size() % 16; // 128 bit = block size
-	
+void aes_encrypt(crypto::safe_vector<uint8_t> &plain_text, crypto::safe_vector<uint8_t> &cipher_text, 
+				std::span<const uint8_t> round_key) { // view on round_key
 	// Context
 	cl::Context context(device);
 	cl::CommandQueue queue(context, device);
 
 	// Program
 	// Load source code
-	std::filesystem::path kernel_path = std::filesystem::current_path() / "aes_kernel.cl";
+	std::filesystem::path kernel_path = std::filesystem::current_path() / "kernels" / "aes_kernel.cl";
 	std::ifstream file(kernel_path);
 	if (!file.is_open()) {
 		throw std::runtime_error("Impossibile aprire il file aes_kernel.cl");
@@ -84,26 +84,27 @@ void aes_encrypt(crypto::safe_vector<uint8_t> plain_text, crypto::safe_vector<ui
 	cl::Program program(context, sources);
 	cl_int err_pr = program.build({device}, aes_version_define.c_str());
 
-	// Create kernels for specific functions
-	/*
-	cl::Kernel round_key_gen(program, "key_derivation_funct");
-	// OpenCL Buffers for the key
-	cl::Buffer key_buf(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, aes_key.size(), aes_key.data());
-	cl::Buffer round_keys_buf(context, CL_MEM_READ_WRITE, round_keys_size);
-	// Kernel functor
-	cl::KernelFunctor<cl::Buffer, cl::Buffer> key_expander(round_key_gen);
-	// Execute the function
-	size_t global_work_size = round_keys_size; // parallel work
-	key_expander(cl::EnqueueArgs(queue, cl::NDRange(global_work_size)), key_buf, round_keys_buf);
-	// Read data
-	queue.enqueueReadBuffer(round_keys_buf, CL_TRUE, 0, round_keys_size, round_keys.data());
-	*/
+	if (err_pr != CL_SUCCESS) {
+		std::string build_log = program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device);
+		std::cerr << "Build failed with error code " << err_pr << "\n";
+		std::cerr << "Build log:\n" << build_log << '\n';
+	}
 
-
+	// Kernel creation to encrypt
 	cl::Kernel encrypt(program, "encrypt_n");
-	// OpenCL buffers for plaintext and chipertext
-	cl::Buffer plaintext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(uint8_t) * plain_text.size(), plain_text.data());
 	
+	// OpenCL buffers for plaintext and chipertext
+	cl::Buffer plaintext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, plain_text.size(), plain_text.data());
+	cl::Buffer ciphertext(context, CL_MEM_READ_WRITE, cipher_text.size());
+	cl::Buffer roundkey(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, round_key.size_bytes(), (void*) round_key.data()); // accetta solo void come pointer
+	
+	// Kernel functor
+	cl::KernelFunctor<cl::Buffer, cl::Buffer, cl::Buffer> encrypter(encrypt);
+	// Execute the function
+	size_t global_work_size = 16; // parallel work 16 = bytes matrix
+	encrypter(cl::EnqueueArgs(queue, cl::NDRange(global_work_size)), plaintext, ciphertext, roundkey);
+	// Read data
+	queue.enqueueReadBuffer(ciphertext, CL_TRUE, 0, cipher_text.size(), cipher_text.data());	
 	queue.finish();
 }
 
