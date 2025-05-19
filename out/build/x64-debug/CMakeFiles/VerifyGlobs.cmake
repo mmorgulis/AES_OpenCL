@@ -69,7 +69,7 @@ endif()
 # SOURCES at CMakeLists.txt:35 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.cpp")
 set(OLD_GLOB
-  "D:/VisualStudio/repos/OpenCL_cryptography/src/test_main.cpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/host.cpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.cpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.cpp"
   )

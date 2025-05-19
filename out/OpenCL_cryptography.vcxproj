@@ -436,6 +436,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\VisualStudio\repos\OpenCL_cryptography\src\host.cpp" />
     <ClCompile Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_core.cpp" />
     <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_core.h" />
+    <ClCompile Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_host.cpp" />
+    <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_host.h" />
     <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\cxxopts.hpp" />
     <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\safe_allocator.hpp" />
   </ItemGroup>

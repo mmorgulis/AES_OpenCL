@@ -42,11 +42,11 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 )   
 
 # Crea l'eseguibile
-add_executable(OpenCL_cryptography ${SOURCES} "src/test_main.cpp"  "src/utils/aes_core.h"   "src/utils/aes_core.cpp" "src/utils/aes_host.h" "src/utils/aes_host.cpp")
+add_executable(OpenCL_cryptography ${SOURCES})
 
 # Collega OpenCL
-target_link_libraries(OpenCL_cryptography PRIVATE OpenCL)
-target_link_libraries(OpenCL_cryptography PRIVATE Botan::Botan)
+target_link_libraries(OpenCL_cryptography PUBLIC OpenCL)
+target_link_libraries(OpenCL_cryptography PUBLIC Botan::Botan)
 
 # Imposta una variabile per il path alla DLL
 if(NOT DEFINED ENV{Botan_LIB})
@@ -69,10 +69,16 @@ add_custom_command(TARGET OpenCL_cryptography POST_BUILD
             $<TARGET_FILE_DIR:OpenCL_cryptography>/kernels
 )
 
+# Abilita i test
+enable_testing()
+
+# Aggiungi la directory del src (per lib)
+add_subdirectory(src)
+
+# Aggiungi la directory dei test
+add_subdirectory(tests)
 
 # Messaggio finale
 message(STATUS "OpenCL_cryptography configurato")
 message(STATUS "Version : ${Botan_VERSION}")
 message(STATUS "Found : ${Botan_FOUND}")
-
-

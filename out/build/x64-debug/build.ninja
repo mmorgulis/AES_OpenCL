@@ -49,7 +49,7 @@ cmake_ninja_workdir = D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-d
 
 build cmake_object_order_depends_target_OpenCL_cryptography: phony || .
 
-build CMakeFiles\OpenCL_cryptography.dir\src\test_main.cpp.obj: CXX_COMPILER__OpenCL_cryptography_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\test_main.cpp || cmake_object_order_depends_target_OpenCL_cryptography
+build CMakeFiles\OpenCL_cryptography.dir\src\host.cpp.obj: CXX_COMPILER__OpenCL_cryptography_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\host.cpp || cmake_object_order_depends_target_OpenCL_cryptography
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
   INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
   OBJECT_DIR = CMakeFiles\OpenCL_cryptography.dir
@@ -81,7 +81,7 @@ build CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_host.cpp.obj: CXX_COMPILE
 #############################################
 # Link the executable OpenCL_cryptography.exe
 
-build OpenCL_cryptography.exe: CXX_EXECUTABLE_LINKER__OpenCL_cryptography_Debug CMakeFiles\OpenCL_cryptography.dir\src\test_main.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_core.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_host.cpp.obj | D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib
+build OpenCL_cryptography.exe: CXX_EXECUTABLE_LINKER__OpenCL_cryptography_Debug CMakeFiles\OpenCL_cryptography.dir\src\host.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_core.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_host.cpp.obj | D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = D:\Botan-3.8.1\build-output\lib\botan-3.lib  D:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -92,6 +92,18 @@ build OpenCL_cryptography.exe: CXX_EXECUTABLE_LINKER__OpenCL_cryptography_Debug 
   TARGET_FILE = OpenCL_cryptography.exe
   TARGET_IMPLIB = OpenCL_cryptography.lib
   TARGET_PDB = OpenCL_cryptography.pdb
+
+
+#############################################
+# Utility command for test
+
+build CMakeFiles\test.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe --force-new-ctest-process "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build test: phony CMakeFiles\test.util
 
 
 #############################################
@@ -117,9 +129,226 @@ build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# D:/VisualStudio/repos/OpenCL_cryptography/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target OpenCL_crypto_lib
+
+
+#############################################
+# Order-only phony target for OpenCL_crypto_lib
+
+build cmake_object_order_depends_target_OpenCL_crypto_lib: phony || .
+
+build src\CMakeFiles\OpenCL_crypto_lib.dir\host.cpp.obj: CXX_COMPILER__OpenCL_crypto_lib_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\host.cpp || cmake_object_order_depends_target_OpenCL_crypto_lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
+  INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\src -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
+  OBJECT_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir
+  OBJECT_FILE_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir
+  TARGET_COMPILE_PDB = src\CMakeFiles\OpenCL_crypto_lib.dir\OpenCL_crypto_lib.pdb
+  TARGET_PDB = src\OpenCL_crypto_lib.pdb
+
+build src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_core.cpp.obj: CXX_COMPILER__OpenCL_crypto_lib_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_core.cpp || cmake_object_order_depends_target_OpenCL_crypto_lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
+  INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\src -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
+  OBJECT_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir
+  OBJECT_FILE_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir\utils
+  TARGET_COMPILE_PDB = src\CMakeFiles\OpenCL_crypto_lib.dir\OpenCL_crypto_lib.pdb
+  TARGET_PDB = src\OpenCL_crypto_lib.pdb
+
+build src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_host.cpp.obj: CXX_COMPILER__OpenCL_crypto_lib_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_host.cpp || cmake_object_order_depends_target_OpenCL_crypto_lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
+  INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\src -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
+  OBJECT_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir
+  OBJECT_FILE_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir\utils
+  TARGET_COMPILE_PDB = src\CMakeFiles\OpenCL_crypto_lib.dir\OpenCL_crypto_lib.pdb
+  TARGET_PDB = src\OpenCL_crypto_lib.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target OpenCL_crypto_lib
+
+
+#############################################
+# Link the static library src\OpenCL_crypto_lib.lib
+
+build src\OpenCL_crypto_lib.lib: CXX_STATIC_LIBRARY_LINKER__OpenCL_crypto_lib_Debug src\CMakeFiles\OpenCL_crypto_lib.dir\host.cpp.obj src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_core.cpp.obj src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_host.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
+  LINK_FLAGS = /machine:x64
+  OBJECT_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = src\CMakeFiles\OpenCL_crypto_lib.dir\OpenCL_crypto_lib.pdb
+  TARGET_FILE = src\OpenCL_crypto_lib.lib
+  TARGET_PDB = src\OpenCL_crypto_lib.pdb
+
+
+#############################################
+# Utility command for test
+
+build src\CMakeFiles\test.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\src && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe --force-new-ctest-process "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build src\test: phony src\CMakeFiles\test.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build src\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\src && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src\edit_cache: phony src\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\src && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe --regenerate-during-build -SD:\VisualStudio\repos\OpenCL_cryptography -BD:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src\rebuild_cache: phony src\CMakeFiles\rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# D:/VisualStudio/repos/OpenCL_cryptography/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test_key
+
+
+#############################################
+# Order-only phony target for test_key
+
+build cmake_object_order_depends_target_test_key: phony || cmake_object_order_depends_target_OpenCL_crypto_lib
+
+build tests\CMakeFiles\test_key.dir\key_expansion_test.cpp.obj: CXX_COMPILER__test_key_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\tests\key_expansion_test.cpp || cmake_object_order_depends_target_test_key
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
+  INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\src -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
+  OBJECT_DIR = tests\CMakeFiles\test_key.dir
+  OBJECT_FILE_DIR = tests\CMakeFiles\test_key.dir
+  TARGET_COMPILE_PDB = tests\CMakeFiles\test_key.dir\
+  TARGET_PDB = tests\test_key.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_key
+
+
+#############################################
+# Link the executable tests\test_key.exe
+
+build tests\test_key.exe: CXX_EXECUTABLE_LINKER__test_key_Debug tests\CMakeFiles\test_key.dir\key_expansion_test.cpp.obj | src\OpenCL_crypto_lib.lib D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib || src\OpenCL_crypto_lib.lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = src\OpenCL_crypto_lib.lib  D:\Botan-3.8.1\build-output\lib\botan-3.lib  D:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = tests\CMakeFiles\test_key.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = tests\CMakeFiles\test_key.dir\
+  TARGET_FILE = tests\test_key.exe
+  TARGET_IMPLIB = tests\test_key.lib
+  TARGET_PDB = tests\test_key.pdb
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test_enc
+
+
+#############################################
+# Order-only phony target for test_enc
+
+build cmake_object_order_depends_target_test_enc: phony || cmake_object_order_depends_target_OpenCL_crypto_lib
+
+build tests\CMakeFiles\test_enc.dir\encrypt_test.cpp.obj: CXX_COMPILER__test_enc_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\tests\encrypt_test.cpp || cmake_object_order_depends_target_test_enc
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
+  INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\src -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
+  OBJECT_DIR = tests\CMakeFiles\test_enc.dir
+  OBJECT_FILE_DIR = tests\CMakeFiles\test_enc.dir
+  TARGET_COMPILE_PDB = tests\CMakeFiles\test_enc.dir\
+  TARGET_PDB = tests\test_enc.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_enc
+
+
+#############################################
+# Link the executable tests\test_enc.exe
+
+build tests\test_enc.exe: CXX_EXECUTABLE_LINKER__test_enc_Debug tests\CMakeFiles\test_enc.dir\encrypt_test.cpp.obj | src\OpenCL_crypto_lib.lib D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib || src\OpenCL_crypto_lib.lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = src\OpenCL_crypto_lib.lib  D:\Botan-3.8.1\build-output\lib\botan-3.lib  D:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = tests\CMakeFiles\test_enc.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = tests\CMakeFiles\test_enc.dir\
+  TARGET_FILE = tests\test_enc.exe
+  TARGET_IMPLIB = tests\test_enc.lib
+  TARGET_PDB = tests\test_enc.pdb
+
+
+#############################################
+# Utility command for test
+
+build tests\CMakeFiles\test.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\tests && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe --force-new-ctest-process "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build tests\test: phony tests\CMakeFiles\test.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build tests\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\tests && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build tests\edit_cache: phony tests\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build tests\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\tests && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe --regenerate-during-build -SD:\VisualStudio\repos\OpenCL_cryptography -BD:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build tests\rebuild_cache: phony tests\CMakeFiles\rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
+build OpenCL_crypto_lib: phony src\OpenCL_crypto_lib.lib
+
+build OpenCL_crypto_lib.lib: phony src\OpenCL_crypto_lib.lib
+
 build OpenCL_cryptography: phony OpenCL_cryptography.exe
+
+build test_enc: phony tests\test_enc.exe
+
+build test_enc.exe: phony tests\test_enc.exe
+
+build test_key: phony tests\test_key.exe
+
+build test_key.exe: phony tests\test_key.exe
 
 # =============================================================================
 # Folder targets.
@@ -129,7 +358,21 @@ build OpenCL_cryptography: phony OpenCL_cryptography.exe
 #############################################
 # Folder: D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug
 
-build all: phony OpenCL_cryptography.exe
+build all: phony OpenCL_cryptography.exe src\all tests\all
+
+# =============================================================================
+
+#############################################
+# Folder: D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/src
+
+build src\all: phony src\OpenCL_crypto_lib.lib
+
+# =============================================================================
+
+#############################################
+# Folder: D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests
+
+build tests\all: phony tests\test_key.exe tests\test_enc.exe
 
 # =============================================================================
 # Built-in targets
@@ -152,14 +395,14 @@ build D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\CMakeFiles\
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\CMakeFiles\cmake.verify_globs | CMakeCache.txt CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\CMakeFiles\VerifyGlobs.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config-version.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake D$:\VisualStudio\repos\OpenCL_cryptography\CMakeLists.txt
+build build.ninja: RERUN_CMAKE D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\CMakeFiles\cmake.verify_globs | CMakeCache.txt CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\CMakeFiles\VerifyGlobs.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config-version.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake D$:\VisualStudio\repos\OpenCL_cryptography\CMakeLists.txt D$:\VisualStudio\repos\OpenCL_cryptography\src\CMakeLists.txt D$:\VisualStudio\repos\OpenCL_cryptography\tests\CMakeLists.txt
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build CMakeCache.txt CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\CMakeFiles\VerifyGlobs.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config-version.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake D$:\VisualStudio\repos\OpenCL_cryptography\CMakeLists.txt: phony
+build CMakeCache.txt CMakeFiles\3.30.5-msvc23\CMakeCXXCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeRCCompiler.cmake CMakeFiles\3.30.5-msvc23\CMakeSystem.cmake D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug\CMakeFiles\VerifyGlobs.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config-version.cmake D$:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1\botan-config.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake D$:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake D$:\VisualStudio\repos\OpenCL_cryptography\CMakeLists.txt D$:\VisualStudio\repos\OpenCL_cryptography\src\CMakeLists.txt D$:\VisualStudio\repos\OpenCL_cryptography\tests\CMakeLists.txt: phony
 
 
 #############################################

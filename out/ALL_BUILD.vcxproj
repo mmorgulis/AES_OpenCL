@@ -178,6 +178,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{13525A15-9C75-301E-B186-B1BECF7F9665}</Project>
       <Name>OpenCL_cryptography</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\VisualStudio\repos\OpenCL_cryptography\out\tests\test_chiavi.vcxproj">
+      <Project>{FAE47C4F-47AE-39BD-8947-10BEFB0EBEA2}</Project>
+      <Name>test_chiavi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

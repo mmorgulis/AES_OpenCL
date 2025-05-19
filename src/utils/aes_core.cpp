@@ -6,8 +6,8 @@
 #include <numeric>
 
 
-void generate_aes_key(crypto::safe_vector<uint8_t> &aes_key, crypto::safe_vector<uint8_t> &round_keys) {
-	// Generate key
+void generate_aes_key(crypto::safe_vector<uint8_t> &aes_key) {
+	// Use random generator from Botan
 	aes_key.resize(key_length / 8);
 	std::unique_ptr<Botan::RandomNumberGenerator> rng;
 	#if defined (BOTAN_HAS_SYSTEM_RNG)
@@ -15,42 +15,8 @@ void generate_aes_key(crypto::safe_vector<uint8_t> &aes_key, crypto::safe_vector
 	#else
 		rng.reset(new Botan::AutoSeeded_RNG);
 	#endif
-	
-	
-	//rng->randomize(aes_key.data(), aes_key.size());
-
-	// TEST VALUE
-	/*
-	uint8_t key[16] = {
-		0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
-		0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c
-	};
-	aes_key.assign(key, key + 16); */
-
-	/* Cipher attended
-	3a d7 7b b4 0d 7a 36 60 a8 9e ca f3 24 66 ef 97
-	*/
-
-	
-	uint8_t key[16] = {
-		0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-		0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	};
-	aes_key.assign(key, key + 16); 
-
-	/*
-	uint8_t key[32] = {
-		0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe,
-		0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81,
-		0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7,
-		0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4
-	};
-	aes_key.assign(key, key + 32);
-	*/
-
-	
-	key_schedule(aes_key, round_keys);
-	
+	// Generate pseudo-random number
+	rng->randomize(aes_key.data(), aes_key.size());	
 }
 
 // Implementation followed : https://www.samiam.org/key-schedule.html
@@ -159,4 +125,9 @@ std::span<const uint8_t> select_round_key(std::span<const uint8_t> round_keys, u
     }
 
     return round_keys.subspan(offset, 16); 
+}
+
+crypto::safe_vector<uint8_t> invert_round_keys(crypto::safe_vector<uint8_t>& round_keys) {
+	//return { round_keys.rbegin(), round_keys.rend() };
+	return crypto::safe_vector<uint8_t>(round_keys.rbegin(), round_keys.rend());
 }

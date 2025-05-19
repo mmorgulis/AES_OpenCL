@@ -7,6 +7,9 @@
     <ClCompile Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_host.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\include\CL\Utils\Context.h">
@@ -121,6 +124,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\aes_host.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\VisualStudio\repos\OpenCL_cryptography\src\utils\cxxopts.hpp">
