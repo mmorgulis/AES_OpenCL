@@ -11,7 +11,6 @@
 #include "aes_core.h"
 #include "aes_host.h"
 #include "safe_allocator.hpp"
-#include <span>
 
 bool find_platforms(cl::Platform& platform_chosen, cl::Device& device_chosen) noexcept {
 	std::vector<cl::Platform> platforms;
