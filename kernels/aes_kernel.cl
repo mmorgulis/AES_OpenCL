@@ -157,7 +157,7 @@ inline uchar16 InvSubBytes(uchar16 s) {
 }
 
 inline uchar16 ShiftRows(uchar16 s) {
-    return (uchar16)(
+    return (uchar16)(   
         s.s0, s.s1, s.s2, s.s3,
         s.s5, s.s6, s.s7, s.s4,
         s.sa, s.sb, s.s8, s.s9,
@@ -328,18 +328,18 @@ __kernel void decrypt_n(__global uchar *input, __global uchar *output, __global 
 
     // First Round
     state = AddRoundKey(state, vload16(NUM_ROUND, round_key));
-    state = InvShiftRows(state);
-    state = InvShiftRows(state);
 
-    // 1 - num_round-1
+    // num_round-1 to 1
     for (int i = NUM_ROUND - 1; i > 0; --i) {
-        state = AddRoundKey(state, vload16(i, round_key));
-        state = InvMixColumns(state);
         state = InvShiftRows(state);
-        state = InvSubBytes(state);        
+        state = InvSubBytes(state);
+        state = AddRoundKey(state, vload16(i, round_key));
+        state = InvMixColumns(state);        
     }
 
     // Last Round
+    state = InvShiftRows(state);
+    state = InvSubBytes(state);
     state = AddRoundKey(state, vload16(0, round_key));
 
     // Write the result
