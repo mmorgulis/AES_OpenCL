@@ -60,10 +60,14 @@ if(NOT EXISTS "${BOTAN_DLL_PATH}")
 endif()
 
 # Copia i kernels e il dll dopo la build
+# La dll è necessaria sia nella cartella di build che in quella di test
 add_custom_command(TARGET OpenCL_cryptography POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${BOTAN_DLL_PATH}"
             $<TARGET_FILE_DIR:OpenCL_cryptography>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${BOTAN_DLL_PATH}"
+            "$<TARGET_FILE_DIR:OpenCL_cryptography>/tests"
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/kernels
             $<TARGET_FILE_DIR:OpenCL_cryptography>/kernels

@@ -61,7 +61,7 @@
 			"expression" : "D:/VisualStudio/repos/OpenCL_cryptography/src/*.cpp",
 			"paths" : 
 			[
-				"D:/VisualStudio/repos/OpenCL_cryptography/src/host.cpp",
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/main.cpp",
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.cpp",
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.cpp"
 			],
@@ -72,7 +72,8 @@
 			"paths" : 
 			[
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.h",
-				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.h"
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.h",
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/gcm_aes.h"
 			],
 			"recurse" : true
 		},

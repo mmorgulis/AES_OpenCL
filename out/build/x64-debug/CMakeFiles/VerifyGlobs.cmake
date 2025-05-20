@@ -69,7 +69,7 @@ endif()
 # SOURCES at CMakeLists.txt:35 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_cryptography/src/*.cpp")
 set(OLD_GLOB
-  "D:/VisualStudio/repos/OpenCL_cryptography/src/host.cpp"
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/main.cpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.cpp"
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.cpp"
   )
@@ -83,6 +83,7 @@ file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/VisualStudio/repos/OpenCL_
 set(OLD_GLOB
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.h"
   "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.h"
+  "D:/VisualStudio/repos/OpenCL_cryptography/src/utils/gcm_aes.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

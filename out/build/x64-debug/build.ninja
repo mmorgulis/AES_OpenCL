@@ -49,7 +49,7 @@ cmake_ninja_workdir = D$:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-d
 
 build cmake_object_order_depends_target_OpenCL_cryptography: phony || .
 
-build CMakeFiles\OpenCL_cryptography.dir\src\host.cpp.obj: CXX_COMPILER__OpenCL_cryptography_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\host.cpp || cmake_object_order_depends_target_OpenCL_cryptography
+build CMakeFiles\OpenCL_cryptography.dir\src\main.cpp.obj: CXX_COMPILER__OpenCL_cryptography_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\main.cpp || cmake_object_order_depends_target_OpenCL_cryptography
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
   INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
   OBJECT_DIR = CMakeFiles\OpenCL_cryptography.dir
@@ -81,12 +81,12 @@ build CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_host.cpp.obj: CXX_COMPILE
 #############################################
 # Link the executable OpenCL_cryptography.exe
 
-build OpenCL_cryptography.exe: CXX_EXECUTABLE_LINKER__OpenCL_cryptography_Debug CMakeFiles\OpenCL_cryptography.dir\src\host.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_core.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_host.cpp.obj | D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib
+build OpenCL_cryptography.exe: CXX_EXECUTABLE_LINKER__OpenCL_cryptography_Debug CMakeFiles\OpenCL_cryptography.dir\src\main.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_core.cpp.obj CMakeFiles\OpenCL_cryptography.dir\src\utils\aes_host.cpp.obj | D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = D:\Botan-3.8.1\build-output\lib\botan-3.lib  D:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\OpenCL_cryptography.dir
-  POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E copy_if_different D:\Botan-3.8.1\build-output\bin/botan-3.dll D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E copy_directory D:/VisualStudio/repos/OpenCL_cryptography/kernels D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/kernels"
+  POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D D:\VisualStudio\repos\OpenCL_cryptography\out\build\x64-debug && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E copy_if_different D:\Botan-3.8.1\build-output\bin/botan-3.dll D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E copy_if_different D:\Botan-3.8.1\build-output\bin/botan-3.dll D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests && D:\VisualStudio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E copy_directory D:/VisualStudio/repos/OpenCL_cryptography/kernels D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/kernels"
   PRE_LINK = cd .
   TARGET_COMPILE_PDB = CMakeFiles\OpenCL_cryptography.dir\
   TARGET_FILE = OpenCL_cryptography.exe
@@ -142,7 +142,7 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 
 build cmake_object_order_depends_target_OpenCL_crypto_lib: phony || .
 
-build src\CMakeFiles\OpenCL_crypto_lib.dir\host.cpp.obj: CXX_COMPILER__OpenCL_crypto_lib_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\host.cpp || cmake_object_order_depends_target_OpenCL_crypto_lib
+build src\CMakeFiles\OpenCL_crypto_lib.dir\main.cpp.obj: CXX_COMPILER__OpenCL_crypto_lib_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\src\main.cpp || cmake_object_order_depends_target_OpenCL_crypto_lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
   INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\src -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
   OBJECT_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir
@@ -174,7 +174,7 @@ build src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_host.cpp.obj: CXX_COMPILER_
 #############################################
 # Link the static library src\OpenCL_crypto_lib.lib
 
-build src\OpenCL_crypto_lib.lib: CXX_STATIC_LIBRARY_LINKER__OpenCL_crypto_lib_Debug src\CMakeFiles\OpenCL_crypto_lib.dir\host.cpp.obj src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_core.cpp.obj src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_host.cpp.obj
+build src\OpenCL_crypto_lib.lib: CXX_STATIC_LIBRARY_LINKER__OpenCL_crypto_lib_Debug src\CMakeFiles\OpenCL_crypto_lib.dir\main.cpp.obj src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_core.cpp.obj src\CMakeFiles\OpenCL_crypto_lib.dir\utils\aes_host.cpp.obj
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = src\CMakeFiles\OpenCL_crypto_lib.dir
