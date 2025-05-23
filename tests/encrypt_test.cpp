@@ -33,7 +33,7 @@ int main() {
 		0x24, 0x66, 0xef, 0x97
 	};
 
-	key_schedule(aes_key, round_keys);
+	key_schedule(aes_key);
 	if (!find_platforms(platform, device)) {
 		throw std::runtime_error("No platforms detected");
 	}

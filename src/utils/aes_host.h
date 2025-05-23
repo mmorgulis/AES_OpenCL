@@ -6,6 +6,7 @@
 
 #include <CL/opencl.hpp> // cl::
 #include "safe_allocator.hpp" // crypto
+#include <span>
 
 // OpenCL current device
 inline cl::Platform platform;
@@ -15,11 +16,11 @@ inline cl::Device device;
 bool find_platforms(cl::Platform& platform_chosen, cl::Device& device_chosen) noexcept;
 
 // Communicates with OpenCL to encrypt
-void aes_encrypt(crypto::safe_vector<uint8_t>& plain_text, crypto::safe_vector<uint8_t>& cipher_text,
-	crypto::safe_vector<uint8_t>& round_keys);
+void aes_encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text,
+	std::span<const uint8_t> round_keys);
 
 // Communicates with OpenCL to encrypt
-void aes_decrypt(crypto::safe_vector<uint8_t> &plain_text, crypto::safe_vector<uint8_t> &cipher_text,
-	crypto::safe_vector<uint8_t>& inv_round_keys);
+void aes_decrypt(std::span<const uint8_t> cipher_text, std::span<uint8_t> plain_text,
+	std::span< const uint8_t> round_keys);
 
 #endif // AES_HOST_H

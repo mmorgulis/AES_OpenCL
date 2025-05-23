@@ -4,12 +4,12 @@
 #define CL_TARGET_OPENCL_VERSION 300
 #define CL_HPP_TARGET_OPENCL_VERSION 300
 
-#include <cstdint>
-#include <string>
 #include "safe_allocator.hpp"
+#include <cstdint>
 #include <span>
+#include <string>
 
-/*
+/**
 * AES Sbox: GF(2^8) elements matrix defined with affine tranformation
 * https://en.wikipedia.org/wiki/Rijndael_S-box
 */
@@ -69,9 +69,9 @@ inline unsigned int num_rounds = 10;
 inline unsigned int num_round_keys = 11; // num_rounds + 1
 inline std::string aes_version_define = "-DAES_128";
 
-void generate_aes_key(crypto::safe_vector<uint8_t> &aes_key);
+crypto::safe_vector<uint8_t> generate_aes_key();
 
-/*
+/**
 * @brief Function to create round keys
 * 
 * Every round keys depend on the previous one,
@@ -79,30 +79,23 @@ void generate_aes_key(crypto::safe_vector<uint8_t> &aes_key);
 * 
 * @param key vector for aes key, length depending on the version of aes
 * 
-* @param key vector for round keys, every rows is a byte of the round key,
+* @return key vector for round keys, every rows is a byte of the round key,
 * the number of rows that rapresent a complete key depend on the version of aes
 * The function return void but fill the round_keys vector
 *		
 */
-void key_schedule(crypto::safe_vector<uint8_t>& key, crypto::safe_vector<uint8_t>& round_keys);
+crypto::safe_vector<uint8_t> key_schedule(std::span<const uint8_t> key);
 
-/*
+/**
 * @brief Support function of key_schedule
 * It does most of the maths computation (rotation, subword, rcon)
 */
 void schedule_core(std::array<uint8_t, 4>& t, unsigned int num_curr_round);
 
-/*
+/**
 * @brief Support function of schedule_core 
 * It does the rotation of a for byte array
 */
 void rotate(std::array<uint8_t, 4>& t);
-
-/*
-* 
-*/
-std::span<const uint8_t> select_round_key(std::span<const uint8_t> round_keys, unsigned int num_key);
-
-crypto::safe_vector<uint8_t> invert_round_keys(crypto::safe_vector<uint8_t>& round_keys);
 
 #endif // !AES_CORE_H

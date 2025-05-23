@@ -1,16 +1,17 @@
-#include "safe_allocator.hpp"
+#ifndef AES_MODE_H
+#define AES_MODE_H
+
+#include <span>
 /**
-* Abstract class to implement the concept of mode
+* Interface to implement the concept of mode
 */
 class AES_MODE {
-	private:
-		crypto::safe_vector<uint8_t> _key;
-		crypto::safe_vector<uint8_t> _iv;
-
-	public:
-		virtual ~AES_MODE() = default;
-		virtual void encrypt() = 0;
-		virtual void decrypt() = 0;
-		// Function that divide plain text in blocks and add padding
-		virtual void elaborate_plain_text(crypto::safe_vector<uint8_t> plain_text) = 0;
+public:
+	virtual ~AES_MODE() = default;
+	virtual void encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text) = 0;
+	virtual void decrypt(std::span<const uint8_t> cipher_text, std::span<uint8_t> plain_text) = 0;
+	// Function that divide plain text in blocks and add padding
+	virtual void elaborate_plain_text(std::span<const uint8_t> plain_text) = 0;
 };
+
+#endif // !AES_MODE_H

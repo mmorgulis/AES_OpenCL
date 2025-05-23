@@ -74,10 +74,12 @@ std::string loadSourceCode() {
 
 }
 
-void aes_encrypt(crypto::safe_vector<uint8_t> &plain_text, crypto::safe_vector<uint8_t> &cipher_text, 
-				crypto::safe_vector<uint8_t> &round_keys) {
-
-	cipher_text.resize(plain_text.size());
+void aes_encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text, 
+				std::span<const uint8_t> round_keys) {
+	// Safety control
+	if (cipher_text.size() != plain_text.size()) {
+        throw std::invalid_argument("Size error");
+    }
 	std::string sourceCode = loadSourceCode();
 
 	// Context
@@ -101,9 +103,9 @@ void aes_encrypt(crypto::safe_vector<uint8_t> &plain_text, crypto::safe_vector<u
 	cl::Kernel encrypt(program, "encrypt");
 	
 	// OpenCL buffers for plaintext and chipertext
-	cl::Buffer plaintext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, plain_text.size(), plain_text.data());
+	cl::Buffer plaintext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, plain_text.size(), (void*) plain_text.data());
 	cl::Buffer ciphertext(context, CL_MEM_READ_WRITE, cipher_text.size());
-	cl::Buffer roundkey(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, round_keys.size(), round_keys.data());
+	cl::Buffer roundkey(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, round_keys.size(), (void*) round_keys.data());
 	// Kernel functor
 	cl::KernelFunctor<cl::Buffer, cl::Buffer, cl::Buffer> encrypter(encrypt);
 	// Execute the function
@@ -114,9 +116,11 @@ void aes_encrypt(crypto::safe_vector<uint8_t> &plain_text, crypto::safe_vector<u
 	queue.finish();
 }
 
-void aes_decrypt(crypto::safe_vector<uint8_t> &cipher_text, crypto::safe_vector<uint8_t> &plain_text,
-	crypto::safe_vector<uint8_t>& inv_round_keys) {
-	plain_text.resize(cipher_text.size());
+void aes_decrypt(std::span<const uint8_t> cipher_text, std::span<uint8_t> plain_text,
+	std::span<const uint8_t> round_keys) {
+	if (cipher_text.size() != plain_text.size()) {
+        throw std::invalid_argument("Size error");
+    }
 	std::string sourceCode = loadSourceCode();
 	// Context
 	cl::Context context(device);
@@ -136,9 +140,9 @@ void aes_decrypt(crypto::safe_vector<uint8_t> &cipher_text, crypto::safe_vector<
 	}
 	cl::Kernel decrypt(program, "decrypt");
 
-	cl::Buffer ciphertext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, cipher_text.size(), cipher_text.data());
+	cl::Buffer ciphertext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, cipher_text.size(), (void*) cipher_text.data());
 	cl::Buffer plaintext(context, CL_MEM_READ_WRITE, plain_text.size());
-	cl::Buffer inv_roundkey(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inv_round_keys.size(), inv_round_keys.data());
+	cl::Buffer inv_roundkey(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, round_keys.size(), (void*) round_keys.data());
 
 	cl::KernelFunctor<cl::Buffer, cl::Buffer, cl::Buffer> decypter(decrypt);
 	size_t global_work_size = 1; // parallel work 16 = bytes matrix

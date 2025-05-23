@@ -1,5 +1,7 @@
 #include "utils/aes_core.h"
 #include "utils/aes_host.h"
+#include "utils/aes_mode.h"
+#include "utils/aes_gcm.h"
 #include "utils/cxxopts.hpp"
 #include "utils/safe_allocator.hpp"
 
@@ -46,20 +48,11 @@ int main(int argc, char * argv[]) {
 		0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a
 	};
 	
-	crypto::safe_vector<uint8_t> cipher_text;
+	crypto::safe_vector<uint8_t> cipher_text(plain_text.size());
 	
-
-	// The safe allocator of type T is used automatically
-	// Alloc 16 byte by default (empty vector dimension)
-	crypto::safe_vector<uint8_t> aes_key(key_length/8);
-	
-	// Bytes for round_keys array
-	unsigned int round_keys_size = num_round_keys * key_length/8; // bytes
-	crypto::safe_vector<uint8_t> round_keys;
-
 	// Generate AES key and round keys
-	generate_aes_key(aes_key);
-	key_schedule(aes_key, round_keys);
+	crypto::safe_vector<uint8_t> aes_key = generate_aes_key();
+	crypto::safe_vector<uint8_t> round_keys = key_schedule(aes_key);
 	/*
 	// Print round keys
 	int i = 0;
