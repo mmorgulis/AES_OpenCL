@@ -98,7 +98,7 @@ void aes_encrypt(crypto::safe_vector<uint8_t> &plain_text, crypto::safe_vector<u
 	}
 
 	// Kernel creation to encrypt
-	cl::Kernel encrypt(program, "encrypt_n");
+	cl::Kernel encrypt(program, "encrypt");
 	
 	// OpenCL buffers for plaintext and chipertext
 	cl::Buffer plaintext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, plain_text.size(), plain_text.data());
@@ -134,7 +134,7 @@ void aes_decrypt(crypto::safe_vector<uint8_t> &cipher_text, crypto::safe_vector<
 		std::cerr << "Build failed with error code " << err_pr << "\n";
 		std::cerr << "Build log:\n" << build_log << '\n';
 	}
-	cl::Kernel decrypt(program, "decrypt_n");
+	cl::Kernel decrypt(program, "decrypt");
 
 	cl::Buffer ciphertext(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, cipher_text.size(), cipher_text.data());
 	cl::Buffer plaintext(context, CL_MEM_READ_WRITE, plain_text.size());

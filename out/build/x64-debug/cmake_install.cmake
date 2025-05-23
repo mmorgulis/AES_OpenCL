@@ -1,8 +1,8 @@
-# Install script for directory: D:/VisualStudio/repos/OpenCL_cryptography
+# Install script for directory: C:/Users/fabio/OpenCL_cryptography
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "D:/VisualStudio/repos/OpenCL_cryptography/out/install/x64-debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/fabio/OpenCL_cryptography/out/install/x64-debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,8 +34,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/src/cmake_install.cmake")
-  include("D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/cmake_install.cmake")
+  include("C:/Users/fabio/OpenCL_cryptography/out/build/x64-debug/src/cmake_install.cmake")
+  include("C:/Users/fabio/OpenCL_cryptography/out/build/x64-debug/tests/cmake_install.cmake")
 
 endif()
 
@@ -54,6 +54,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/fabio/OpenCL_cryptography/out/build/x64-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

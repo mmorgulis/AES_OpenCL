@@ -1,8 +1,8 @@
-# Install script for directory: D:/VisualStudio/repos/OpenCL_cryptography/tests
+# Install script for directory: C:/Users/fabio/OpenCL_cryptography/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "D:/VisualStudio/repos/OpenCL_cryptography/out/install/x64-debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/fabio/OpenCL_cryptography/out/install/x64-debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

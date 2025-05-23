@@ -287,7 +287,7 @@ inline uchar16 AddRoundKey(uchar16 s, uchar16 key) {
 * @param output 16 byte block ciphered
 * @param round_key 16 byte round key to cipher
 */
-__kernel void encrypt_n(__global const uchar *input, __global uchar *output, __global const uchar *round_key) {
+__kernel void encrypt(__global const uchar *input, __global uchar *output, __global const uchar *round_key) {
     // Useful to work with parallelism
     // It's better to use __private memory because is quicker
     int gid = get_global_id(0);
@@ -321,7 +321,7 @@ __kernel void encrypt_n(__global const uchar *input, __global uchar *output, __g
 }
 
 
-__kernel void decrypt_n(__global uchar *input, __global uchar *output, __global uchar *round_key) {
+__kernel void decrypt(__global uchar *input, __global uchar *output, __global uchar *round_key) {
     int gid = get_global_id(0);
     //int offset = gid * 16;
     uchar16 state = vload16(gid, input);
