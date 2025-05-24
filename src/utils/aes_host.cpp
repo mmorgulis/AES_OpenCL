@@ -109,7 +109,7 @@ void aes_encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_
 	// Kernel functor
 	cl::KernelFunctor<cl::Buffer, cl::Buffer, cl::Buffer> encrypter(encrypt);
 	// Execute the function
-	size_t global_work_size = 1; // parallel work 16 = bytes matrix
+	size_t global_work_size = num_blocks; // parallel work 1 work group for 1 aes block
 	encrypter(cl::EnqueueArgs(queue, cl::NDRange(global_work_size)), plaintext, ciphertext, roundkey);
 	// Read data
 	queue.enqueueReadBuffer(ciphertext, CL_TRUE, 0, cipher_text.size(), cipher_text.data());	

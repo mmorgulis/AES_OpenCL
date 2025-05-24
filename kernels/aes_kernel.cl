@@ -175,6 +175,8 @@ inline uchar16 InvShiftRows(uchar16 s) {
 }
 
 // Code taken from https://www.samiam.org/galois.html
+// General multiplication in GF(2^8)
+// The sum is only the xor
 inline uchar gmul(uchar a, uchar b) {
     int s;
 	int q;
@@ -282,7 +284,7 @@ inline uchar16 AddRoundKey(uchar16 s, uchar16 key) {
 }
 
 /** 
-* @brief Encrypt with GCM AES
+* @brief Encrypt AES
 * @param input 16 byte block input
 * @param output 16 byte block ciphered
 * @param round_key 16 byte round key to cipher
@@ -292,7 +294,7 @@ __kernel void encrypt(__global const uchar *input, __global uchar *output, __glo
     // It's better to use __private memory because is quicker
     int gid = get_global_id(0);
     //int offset = gid * 16;
-    uchar16 state = vload16(0, input);
+    uchar16 state = vload16(gid, input);
 
     // First round
     state = AddRoundKey(state, vload16(0, round_key));

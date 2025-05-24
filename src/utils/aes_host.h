@@ -7,6 +7,7 @@
 #include <CL/opencl.hpp> // cl::
 #include "safe_allocator.hpp" // crypto
 #include <span>
+#include <string>
 
 // OpenCL current device
 inline cl::Platform platform;
@@ -14,6 +15,8 @@ inline cl::Device device;
 
 // Fill devices_choosen if the function find a device
 bool find_platforms(cl::Platform& platform_chosen, cl::Device& device_chosen) noexcept;
+
+std::string loadSourceCode();
 
 // Communicates with OpenCL to encrypt
 void aes_encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text,
