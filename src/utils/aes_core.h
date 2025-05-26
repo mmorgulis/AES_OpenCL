@@ -101,4 +101,6 @@ void schedule_core(std::array<uint8_t, 4>& t, unsigned int num_curr_round);
 */
 void rotate(std::array<uint8_t, 4>& t);
 
+void set_aes_parameters(unsigned int key_length);
+
 #endif // !AES_CORE_H

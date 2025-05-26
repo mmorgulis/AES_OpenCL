@@ -1,0 +1,5 @@
+test_key 0 0
+test_enc 0 0
+---
+test_key
+test_enc

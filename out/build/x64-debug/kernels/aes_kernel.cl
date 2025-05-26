@@ -158,24 +158,26 @@ inline uchar16 InvSubBytes(uchar16 s) {
 
 inline uchar16 ShiftRows(uchar16 s) {
     return (uchar16)(   
-        s.s0, s.s1, s.s2, s.s3,
-        s.s5, s.s6, s.s7, s.s4,
-        s.sa, s.sb, s.s8, s.s9,
-        s.sf, s.sc, s.sd, s.se
+        s.s0, s.s5, s.sa, s.sf,
+        s.s4, s.s9, s.se, s.s3,
+        s.s8, s.sd, s.s2, s.s7,
+        s.sc, s.s1, s.s6, s.sb
     );
 }
 
 inline uchar16 InvShiftRows(uchar16 s) {
     return (uchar16)(
-        s.s0, s.s1, s.s2, s.s3,
-        s.s7, s.s4, s.s5, s.s6,
-        s.sa, s.sb, s.s8, s.s9,
-        s.sd, s.se, s.sf, s.sc
+        s.s0, s.sd, s.sa, s.s7,
+        s.s4, s.s1, s.se, s.sb,
+        s.s8, s.s5, s.s2, s.sf,
+        s.sc, s.s9, s.s6, s.s3
     );
 }
 
 // Code taken from https://www.samiam.org/galois.html
-inline uchar gmul(uchar a, uchar b) {
+// General multiplication in GF(2^8)
+// The sum is only the xor
+inline uchar mult_gf8(uchar a, uchar b) {
     int s;
 	int q;
 	int z = 0;
@@ -205,17 +207,17 @@ inline uchar gmul(uchar a, uchar b) {
 
 // Mult by 2 in GF(2^8)
 // To multiply by 3 you can just xor the same vector
-inline uchar mult2GF(uchar a) {
+inline uchar mult2_gf8(uchar a) {
     return (a << 1) ^ ((a >> 7) * 0x1b);
 }
 
 inline uchar4 MixOneColumn(uchar4 col) {
     uchar a0 = col.s0, a1 = col.s1, a2 = col.s2, a3 = col.s3;
     uchar4 res;
-    res.s0 = mult2GF(a0) ^ (mult2GF(a1) ^ a1) ^ a2 ^ a3;
-    res.s1 = a0 ^ mult2GF(a1) ^ (mult2GF(a2) ^ a2) ^ a3;
-    res.s2 = a0 ^ a1 ^ mult2GF(a2) ^ (mult2GF(a3) ^ a3);
-    res.s3 = (mult2GF(a0) ^ a0) ^ a1 ^ a2 ^ mult2GF(a3);
+    res.s0 = mult2_gf8(a0) ^ (mult2_gf8(a1) ^ a1) ^ a2 ^ a3;
+    res.s1 = a0 ^ mult2_gf8(a1) ^ (mult2_gf8(a2) ^ a2) ^ a3;
+    res.s2 = a0 ^ a1 ^ mult2_gf8(a2) ^ (mult2_gf8(a3) ^ a3);
+    res.s3 = (mult2_gf8(a0) ^ a0) ^ a1 ^ a2 ^ mult2_gf8(a3);
 
     return res;
 }
@@ -223,10 +225,10 @@ inline uchar4 MixOneColumn(uchar4 col) {
 inline uchar4 InvMixOneColumn(uchar4 col) {
     uchar a0 = col.s0, a1 = col.s1, a2 = col.s2, a3 = col.s3;
     uchar4 res;
-    res.s0 = gmul(a0, 0x0e) ^ gmul(a1, 0x0b) ^ gmul(a2, 0x0d) ^ gmul(a3, 0x09);
-    res.s1 = gmul(a0, 0x09) ^ gmul(a1, 0x0e) ^ gmul(a2, 0x0b) ^ gmul(a3, 0x0d);
-    res.s2 = gmul(a0, 0x0d) ^ gmul(a1, 0x09) ^ gmul(a2, 0x0e) ^ gmul(a3, 0x0b);
-    res.s3 = gmul(a0, 0x0b) ^ gmul(a1, 0x0d) ^ gmul(a2, 0x09) ^ gmul(a3, 0x0e);
+    res.s0 = mult_gf8(a0, 0x0e) ^ mult_gf8(a1, 0x0b) ^ mult_gf8(a2, 0x0d) ^ mult_gf8(a3, 0x09);
+    res.s1 = mult_gf8(a0, 0x09) ^ mult_gf8(a1, 0x0e) ^ mult_gf8(a2, 0x0b) ^ mult_gf8(a3, 0x0d);
+    res.s2 = mult_gf8(a0, 0x0d) ^ mult_gf8(a1, 0x09) ^ mult_gf8(a2, 0x0e) ^ mult_gf8(a3, 0x0b);
+    res.s3 = mult_gf8(a0, 0x0b) ^ mult_gf8(a1, 0x0d) ^ mult_gf8(a2, 0x09) ^ mult_gf8(a3, 0x0e);
 
     return res;
 }
@@ -235,21 +237,21 @@ inline uchar16 MixColumns(uchar16 s) {
     uchar16 result;
 
     // Mix every columns separately
-    uchar4 c0 = (uchar4) (s.s0, s.s4, s.s8, s.sc);
+    uchar4 c0 = (uchar4) (s.s0, s.s1, s.s2, s.s3);
     c0 = MixOneColumn(c0);
-    result.s0 = c0.s0; result.s4 = c0.s1; result.s8 = c0.s2; result.sc = c0.s3;
+    result.s0 = c0.s0; result.s1 = c0.s1; result.s2 = c0.s2; result.s3 = c0.s3;
 
-    uchar4 c1 = (uchar4)(s.s1, s.s5, s.s9, s.sd);
+    uchar4 c1 = (uchar4)(s.s4, s.s5, s.s6, s.s7);
     c1 = MixOneColumn(c1);
-    result.s1 = c1.s0; result.s5 = c1.s1; result.s9 = c1.s2; result.sd = c1.s3;
+    result.s4 = c1.s0; result.s5 = c1.s1; result.s6 = c1.s2; result.s7 = c1.s3;
 
-    uchar4 c2 = (uchar4)(s.s2, s.s6, s.sa, s.se);
+    uchar4 c2 = (uchar4)(s.s8, s.s9, s.sa, s.sb);
     c2 = MixOneColumn(c2);
-    result.s2 = c2.s0; result.s6 = c2.s1; result.sa = c2.s2; result.se = c2.s3;
+    result.s8 = c2.s0; result.s9 = c2.s1; result.sa = c2.s2; result.sb = c2.s3;
     
-    uchar4 c3 = (uchar4)(s.s3, s.s7, s.sb, s.sf);
+    uchar4 c3 = (uchar4)(s.sc, s.sd, s.se, s.sf);
     c3 = MixOneColumn(c3);
-    result.s3 = c3.s0; result.s7 = c3.s1; result.sb = c3.s2; result.sf = c3.s3;
+    result.sc = c3.s0; result.sd = c3.s1; result.se = c3.s2; result.sf   = c3.s3;
 
     return result;
 }
@@ -258,21 +260,21 @@ inline uchar16 InvMixColumns(uchar16 s) {
     uchar16 result;
 
     // Mix every columns separately
-    uchar4 c0 = (uchar4) (s.s0, s.s4, s.s8, s.sc);
+    uchar4 c0 = (uchar4)(s.s0, s.s1, s.s2, s.s3);
     c0 = InvMixOneColumn(c0);
-    result.s0 = c0.s0; result.s4 = c0.s1; result.s8 = c0.s2; result.sc = c0.s3;
+    result.s0 = c0.s0; result.s1 = c0.s1; result.s2 = c0.s2; result.s3 = c0.s3;
 
-    uchar4 c1 = (uchar4)(s.s1, s.s5, s.s9, s.sd);
+    uchar4 c1 = (uchar4)(s.s4, s.s5, s.s6, s.s7);
     c1 = InvMixOneColumn(c1);
-    result.s1 = c1.s0; result.s5 = c1.s1; result.s9 = c1.s2; result.sd = c1.s3;
+    result.s4 = c1.s0; result.s5 = c1.s1; result.s6 = c1.s2; result.s7 = c1.s3;
 
-    uchar4 c2 = (uchar4)(s.s2, s.s6, s.sa, s.se);
+    uchar4 c2 = (uchar4)(s.s8, s.s9, s.sa, s.sb);
     c2 = InvMixOneColumn(c2);
-    result.s2 = c2.s0; result.s6 = c2.s1; result.sa = c2.s2; result.se = c2.s3;
-    
-    uchar4 c3 = (uchar4)(s.s3, s.s7, s.sb, s.sf);
+    result.s8 = c2.s0; result.s9 = c2.s1; result.sa = c2.s2; result.sb = c2.s3;
+
+    uchar4 c3 = (uchar4)(s.sc, s.sd, s.se, s.sf);
     c3 = InvMixOneColumn(c3);
-    result.s3 = c3.s0; result.s7 = c3.s1; result.sb = c3.s2; result.sf = c3.s3;
+    result.sc = c3.s0; result.sd = c3.s1; result.se = c3.s2; result.sf = c3.s3;
 
     return result;
 }
@@ -282,48 +284,89 @@ inline uchar16 AddRoundKey(uchar16 s, uchar16 key) {
 }
 
 /** 
-* @brief Encrypt with GCM AES
-* @param input 16 byte block input
-* @param output 16 byte block ciphered
-* @param round_key 16 byte round key to cipher
+* @brief Encrypt AES
+* @param input plain text n blocks
+* @param output cipher text n blocks
+* @param round_key expansion of key
 */
 __kernel void encrypt(__global const uchar *input, __global uchar *output, __global const uchar *round_key) {
-    // Useful to work with parallelism
-    // It's better to use __private memory because is quicker
     int gid = get_global_id(0);
-    //int offset = gid * 16;
-    uchar16 state = vload16(0, input);
+    uchar16 state = vload16(gid, input);
+    printf("Stato Iniziale: %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+       state.s0, state.s1, state.s2, state.s3,
+       state.s4, state.s5, state.s6, state.s7,
+       state.s8, state.s9, state.sa, state.sb,
+       state.sc, state.sd, state.se, state.sf);
 
     // First round
     state = AddRoundKey(state, vload16(0, round_key));
+    printf("AddRoundKey:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+       state.s0, state.s1, state.s2, state.s3,
+       state.s4, state.s5, state.s6, state.s7,
+       state.s8, state.s9, state.sa, state.sb,
+       state.sc, state.sd, state.se, state.sf);
 
-    // 1 - num_round-1
     for (int i = 1; i < NUM_ROUND; ++i) {
         state = SubBytes(state);
+        printf("SubBytes:      %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+            state.s0, state.s1, state.s2, state.s3,
+            state.s4, state.s5, state.s6, state.s7,
+            state.s8, state.s9, state.sa, state.sb,
+            state.sc, state.sd, state.se, state.sf);
+
         state = ShiftRows(state);
+        printf("ShiftRows:     %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+            state.s0, state.s1, state.s2, state.s3,
+            state.s4, state.s5, state.s6, state.s7,
+            state.s8, state.s9, state.sa, state.sb,
+            state.sc, state.sd, state.se, state.sf);
+
         state = MixColumns(state);
+        printf("MixColumns:    %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+            state.s0, state.s1, state.s2, state.s3,
+            state.s4, state.s5, state.s6, state.s7,
+            state.s8, state.s9, state.sa, state.sb,
+            state.sc, state.sd, state.se, state.sf);
+
         state = AddRoundKey(state, vload16(i, round_key));
+        printf("AddRoundKey:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+            state.s0, state.s1, state.s2, state.s3,
+            state.s4, state.s5, state.s6, state.s7,
+            state.s8, state.s9, state.sa, state.sb,
+            state.sc, state.sd, state.se, state.sf);
     }
 
     // Last Round
     state = SubBytes(state);
-    state = ShiftRows(state);
-    state = AddRoundKey(state, vload16(NUM_ROUND, round_key));
+    printf("SubBytes:      %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+            state.s0, state.s1, state.s2, state.s3,
+            state.s4, state.s5, state.s6, state.s7,
+            state.s8, state.s9, state.sa, state.sb,
+            state.sc, state.sd, state.se, state.sf);
 
-    /*
-    printf("Output opencl: %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u\n",
-       state.s0, state.s1, state.s2, state.s3,
-       state.s4, state.s5, state.s6, state.s7,
-       state.s8, state.s9, state.sa, state.sb,
-       state.sc, state.sd, state.se, state.sf); */
-    // Write the result
-    vstore16(state, 0, output);
+    state = ShiftRows(state);
+    printf("ShiftRows:     %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+            state.s0, state.s1, state.s2, state.s3,
+            state.s4, state.s5, state.s6, state.s7,
+            state.s8, state.s9, state.sa, state.sb,
+            state.sc, state.sd, state.se, state.sf);
+
+    state = AddRoundKey(state, vload16(NUM_ROUND, round_key));
+    printf("AddRoundKey:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+            state.s0, state.s1, state.s2, state.s3,
+            state.s4, state.s5, state.s6, state.s7,
+            state.s8, state.s9, state.sa, state.sb,
+            state.sc, state.sd, state.se, state.sf);
+
+    // Scrittura risultato finale
+    vstore16(state, gid, output);
 }
+
+
 
 
 __kernel void decrypt(__global uchar *input, __global uchar *output, __global uchar *round_key) {
     int gid = get_global_id(0);
-    //int offset = gid * 16;
     uchar16 state = vload16(gid, input);
 
     // First Round
@@ -343,5 +386,5 @@ __kernel void decrypt(__global uchar *input, __global uchar *output, __global uc
     state = AddRoundKey(state, vload16(0, round_key));
 
     // Write the result
-    vstore16(state, 0, output);
+    vstore16(state, gid, output);
 }

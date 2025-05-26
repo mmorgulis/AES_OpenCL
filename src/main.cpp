@@ -12,6 +12,7 @@
 
 
 int main(int argc, char * argv[]) {
+	
 	/*
 	* TODO : modifico per prendere un plaintext opzionale 
 	* da riga di comando in forma normale
@@ -27,17 +28,20 @@ int main(int argc, char * argv[]) {
 	
 	// Variables bases on key length
 	switch (key_length) {
-	case 128: 
-		aes_version_define = "-DAES_128"; 
+	case 128:
+		aes_version_define = "-DAES_128";
 		num_round_keys = 11;
+		num_rounds = 10;
 		break;
-	case 192: 
-		aes_version_define = "-DAES_192"; 
-		num_round_keys = 13; 
+	case 192:
+		aes_version_define = "-DAES_192";
+		num_round_keys = 13;
+		num_rounds = 12;
 		break;
 	case 256:
-		aes_version_define = "-DAES_256"; 
-		num_round_keys = 15; 
+		aes_version_define = "-DAES_256";
+		num_round_keys = 15;
+		num_rounds = 14;
 		break;
 	default: 
 		throw std::runtime_error("Unsupported Key Length"); 
@@ -93,6 +97,15 @@ int main(int argc, char * argv[]) {
 		std::cout << std::hex << static_cast<int>(byte) << " "; 
 	}
 
+	AES_GCM gcm;
+	gcm.set_key(aes_key);
+	std::array<uint8_t, 12> iv = {1,2,3,4,5,6,7,8,9,'a','b','c'};
+	gcm.set_iv(iv);
+	std::string pl = "Ciao mondo, daje roma";
+	auto cipher = gcm.encrypt(pl);
+	auto plain = gcm.decrypt(cipher);
+	std::cout << '\n' << plain << std::endl;
+	
 	return 0;
 
 }

@@ -5,9 +5,32 @@
 #include <botan/system_rng.h>
 #include <numeric>
 
+void set_aes_parameters(unsigned int aes_version) {
+	switch (aes_version) {
+	case 128:
+		key_length = 128;
+		aes_version_define = "-DAES_128";
+		num_round_keys = 11;
+		num_rounds = 10;
+		break;
+	case 192:
+		key_length = 192;
+		aes_version_define = "-DAES_192";
+		num_round_keys = 13;
+		num_rounds = 12;
+		break;
+	case 256:
+		key_length = 256;
+		aes_version_define = "-DAES_256";
+		num_round_keys = 15;
+		num_rounds = 14;
+		break;
+	}
+}
 
 crypto::safe_vector<uint8_t> generate_aes_key() {
 	crypto::safe_vector<uint8_t> aes_key(key_length/8);
+	set_aes_parameters(key_length);
 	// Use random generator from Botan
 	std::unique_ptr<Botan::RandomNumberGenerator> rng;
 	#if defined (BOTAN_HAS_SYSTEM_RNG)

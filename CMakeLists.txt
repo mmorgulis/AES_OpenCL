@@ -71,6 +71,9 @@ add_custom_command(TARGET OpenCL_cryptography POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/kernels
             $<TARGET_FILE_DIR:OpenCL_cryptography>/kernels
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/kernels
+            "$<TARGET_FILE_DIR:OpenCL_cryptography>/tests/kernels"
 )
 
 # Abilita i test
