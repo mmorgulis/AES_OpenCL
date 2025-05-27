@@ -72,7 +72,7 @@ inline std::string aes_version_define = "-DAES_128";
 inline unsigned int num_blocks = 1;
 */
 
-crypto::safe_vector<uint8_t> generate_aes_key();
+crypto::safe_vector<uint8_t> generate_aes_key(unsigned int key_length);
 
 /**
 * @brief Function to create round keys

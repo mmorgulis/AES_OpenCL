@@ -158,19 +158,19 @@ inline uchar16 InvSubBytes(uchar16 s) {
 
 inline uchar16 ShiftRows(uchar16 s) {
     return (uchar16)(   
-        s.s0, s.s5, s.sa, s.sf,
-        s.s4, s.s9, s.se, s.s3,
-        s.s8, s.sd, s.s2, s.s7,
-        s.sc, s.s1, s.s6, s.sb
+        s.s0, s.s1, s.s2, s.s3,
+        s.s5, s.s6, s.s7, s.s4,
+        s.sa, s.sb, s.s8, s.s9,
+        s.sf, s.sc, s.sd, s.se
     );
 }
 
 inline uchar16 InvShiftRows(uchar16 s) {
     return (uchar16)(
-        s.s0, s.sd, s.sa, s.s7,
-        s.s4, s.s1, s.se, s.sb,
-        s.s8, s.s5, s.s2, s.sf,
-        s.sc, s.s9, s.s6, s.s3
+        s.s0, s.s1, s.s2, s.s3,
+        s.s7, s.s4, s.s5, s.s6,
+        s.sa, s.sb, s.s8, s.s9,
+        s.sd, s.se, s.sf, s.sc  
     );
 }
 
@@ -237,21 +237,21 @@ inline uchar16 MixColumns(uchar16 s) {
     uchar16 result;
 
     // Mix every columns separately
-    uchar4 c0 = (uchar4) (s.s0, s.s1, s.s2, s.s3);
+    uchar4 c0 = (uchar4) (s.s0, s.s4, s.s8, s.sc);
     c0 = MixOneColumn(c0);
-    result.s0 = c0.s0; result.s1 = c0.s1; result.s2 = c0.s2; result.s3 = c0.s3;
+    result.s0 = c0.s0; result.s4 = c0.s1; result.s8 = c0.s2; result.sc = c0.s3;
 
-    uchar4 c1 = (uchar4)(s.s4, s.s5, s.s6, s.s7);
+    uchar4 c1 = (uchar4)(s.s1, s.s5, s.s9, s.sd);
     c1 = MixOneColumn(c1);
-    result.s4 = c1.s0; result.s5 = c1.s1; result.s6 = c1.s2; result.s7 = c1.s3;
+    result.s1 = c1.s0; result.s5 = c1.s1; result.s9 = c1.s2; result.sd = c1.s3;
 
-    uchar4 c2 = (uchar4)(s.s8, s.s9, s.sa, s.sb);
+    uchar4 c2 = (uchar4)(s.s2, s.s6, s.sa, s.se);
     c2 = MixOneColumn(c2);
-    result.s8 = c2.s0; result.s9 = c2.s1; result.sa = c2.s2; result.sb = c2.s3;
+    result.s2 = c2.s0; result.s6 = c2.s1; result.sa = c2.s2; result.se = c2.s3;
     
-    uchar4 c3 = (uchar4)(s.sc, s.sd, s.se, s.sf);
+    uchar4 c3 = (uchar4)(s.s3, s.s7, s.sb, s.sf);
     c3 = MixOneColumn(c3);
-    result.sc = c3.s0; result.sd = c3.s1; result.se = c3.s2; result.sf   = c3.s3;
+    result.s3 = c3.s0; result.s7 = c3.s1; result.sb = c3.s2; result.sf = c3.s3;
 
     return result;
 }
@@ -260,27 +260,38 @@ inline uchar16 InvMixColumns(uchar16 s) {
     uchar16 result;
 
     // Mix every columns separately
-    uchar4 c0 = (uchar4)(s.s0, s.s1, s.s2, s.s3);
+    uchar4 c0 = (uchar4) (s.s0, s.s4, s.s8, s.sc);
     c0 = InvMixOneColumn(c0);
-    result.s0 = c0.s0; result.s1 = c0.s1; result.s2 = c0.s2; result.s3 = c0.s3;
+    result.s0 = c0.s0; result.s4 = c0.s1; result.s8 = c0.s2; result.sc = c0.s3;
 
-    uchar4 c1 = (uchar4)(s.s4, s.s5, s.s6, s.s7);
+    uchar4 c1 = (uchar4)(s.s1, s.s5, s.s9, s.sd);
     c1 = InvMixOneColumn(c1);
-    result.s4 = c1.s0; result.s5 = c1.s1; result.s6 = c1.s2; result.s7 = c1.s3;
+    result.s1 = c1.s0; result.s5 = c1.s1; result.s9 = c1.s2; result.sd = c1.s3;
 
-    uchar4 c2 = (uchar4)(s.s8, s.s9, s.sa, s.sb);
+    uchar4 c2 = (uchar4)(s.s2, s.s6, s.sa, s.se);
     c2 = InvMixOneColumn(c2);
-    result.s8 = c2.s0; result.s9 = c2.s1; result.sa = c2.s2; result.sb = c2.s3;
-
-    uchar4 c3 = (uchar4)(s.sc, s.sd, s.se, s.sf);
+    result.s2 = c2.s0; result.s6 = c2.s1; result.sa = c2.s2; result.se = c2.s3;
+    
+    uchar4 c3 = (uchar4)(s.s3, s.s7, s.sb, s.sf);
     c3 = InvMixOneColumn(c3);
-    result.sc = c3.s0; result.sd = c3.s1; result.se = c3.s2; result.sf = c3.s3;
+    result.s3 = c3.s0; result.s7 = c3.s1; result.sb = c3.s2; result.sf = c3.s3;
 
     return result;
 }
 
 inline uchar16 AddRoundKey(uchar16 s, uchar16 key) {
     return s ^ key;
+}
+
+// AES standard organizes the bytes "column major" so I have to switch from normal vload
+inline uchar16 load_column_major(int gid, __global const uchar *input) {
+    uchar16 s = vload16(gid, input);
+    return (uchar16)(
+        s.s0, s.s4, s.s8,  s.sc,
+        s.s1, s.s5, s.s9,  s.sd,
+        s.s2, s.s6, s.sa,  s.se,
+        s.s3, s.s7, s.sb,  s.sf
+    );
 }
 
 /** 
@@ -291,99 +302,47 @@ inline uchar16 AddRoundKey(uchar16 s, uchar16 key) {
 */
 __kernel void encrypt(__global const uchar *input, __global uchar *output, __global const uchar *round_key) {
     int gid = get_global_id(0);
-    uchar16 state = vload16(gid, input);
-    printf("Stato Iniziale: %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-       state.s0, state.s1, state.s2, state.s3,
-       state.s4, state.s5, state.s6, state.s7,
-       state.s8, state.s9, state.sa, state.sb,
-       state.sc, state.sd, state.se, state.sf);
+    uchar16 state = load_column_major(gid, input);
 
     // First round
-    state = AddRoundKey(state, vload16(0, round_key));
-    printf("AddRoundKey:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-       state.s0, state.s1, state.s2, state.s3,
-       state.s4, state.s5, state.s6, state.s7,
-       state.s8, state.s9, state.sa, state.sb,
-       state.sc, state.sd, state.se, state.sf);
+    state = AddRoundKey(state, load_column_major(0, round_key));
 
     for (int i = 1; i < NUM_ROUND; ++i) {
         state = SubBytes(state);
-        printf("SubBytes:      %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-            state.s0, state.s1, state.s2, state.s3,
-            state.s4, state.s5, state.s6, state.s7,
-            state.s8, state.s9, state.sa, state.sb,
-            state.sc, state.sd, state.se, state.sf);
-
         state = ShiftRows(state);
-        printf("ShiftRows:     %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-            state.s0, state.s1, state.s2, state.s3,
-            state.s4, state.s5, state.s6, state.s7,
-            state.s8, state.s9, state.sa, state.sb,
-            state.sc, state.sd, state.se, state.sf);
-
         state = MixColumns(state);
-        printf("MixColumns:    %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-            state.s0, state.s1, state.s2, state.s3,
-            state.s4, state.s5, state.s6, state.s7,
-            state.s8, state.s9, state.sa, state.sb,
-            state.sc, state.sd, state.se, state.sf);
-
-        state = AddRoundKey(state, vload16(i, round_key));
-        printf("AddRoundKey:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-            state.s0, state.s1, state.s2, state.s3,
-            state.s4, state.s5, state.s6, state.s7,
-            state.s8, state.s9, state.sa, state.sb,
-            state.sc, state.sd, state.se, state.sf);
+        state = AddRoundKey(state, load_column_major(i, round_key));
     }
 
     // Last Round
     state = SubBytes(state);
-    printf("SubBytes:      %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-            state.s0, state.s1, state.s2, state.s3,
-            state.s4, state.s5, state.s6, state.s7,
-            state.s8, state.s9, state.sa, state.sb,
-            state.sc, state.sd, state.se, state.sf);
-
     state = ShiftRows(state);
-    printf("ShiftRows:     %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-            state.s0, state.s1, state.s2, state.s3,
-            state.s4, state.s5, state.s6, state.s7,
-            state.s8, state.s9, state.sa, state.sb,
-            state.sc, state.sd, state.se, state.sf);
-
-    state = AddRoundKey(state, vload16(NUM_ROUND, round_key));
-    printf("AddRoundKey:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-            state.s0, state.s1, state.s2, state.s3,
-            state.s4, state.s5, state.s6, state.s7,
-            state.s8, state.s9, state.sa, state.sb,
-            state.sc, state.sd, state.se, state.sf);
-
+    state = AddRoundKey(state, load_column_major(NUM_ROUND, round_key));
+   
     // Scrittura risultato finale
     vstore16(state, gid, output);
 }
 
 
-
-
 __kernel void decrypt(__global uchar *input, __global uchar *output, __global uchar *round_key) {
     int gid = get_global_id(0);
-    uchar16 state = vload16(gid, input);
+    uchar16 state = load_column_major(gid, input);
 
     // First Round
-    state = AddRoundKey(state, vload16(NUM_ROUND, round_key));
+    state = AddRoundKey(state, load_column_major(NUM_ROUND, round_key));
 
     // num_round-1 to 1
     for (int i = NUM_ROUND - 1; i > 0; --i) {
         state = InvShiftRows(state);
         state = InvSubBytes(state);
-        state = AddRoundKey(state, vload16(i, round_key));
+        state = AddRoundKey(state, load_column_major(i, round_key));
         state = InvMixColumns(state);        
     }
 
     // Last Round
     state = InvShiftRows(state);
     state = InvSubBytes(state);
-    state = AddRoundKey(state, vload16(0, round_key));
+    state = AddRoundKey(state, load_column_major(0, round_key));
 
     // Write the result
     vstore16(state, gid, output);

@@ -28,7 +28,7 @@ void set_aes_parameters(unsigned int aes_version) {
 	}
 }
 
-crypto::safe_vector<uint8_t> generate_aes_key() {
+crypto::safe_vector<uint8_t> generate_aes_key(unsigned int key_length) {
 	crypto::safe_vector<uint8_t> aes_key(key_length/8);
 	set_aes_parameters(key_length);
 	// Use random generator from Botan
