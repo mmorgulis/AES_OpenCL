@@ -63,8 +63,11 @@
 			[
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/main.cpp",
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.cpp",
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_ctr.cpp",
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_gcm.cpp",
-				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.cpp"
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.cpp",
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_mode.cpp",
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/ghash.cpp"
 			],
 			"recurse" : true
 		},
@@ -73,9 +76,11 @@
 			"paths" : 
 			[
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_core.h",
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_ctr.h",
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_gcm.h",
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_host.h",
-				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_mode.h"
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/aes_mode.h",
+				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/ghash.h"
 			],
 			"recurse" : true
 		},
@@ -83,7 +88,6 @@
 			"expression" : "D:/VisualStudio/repos/OpenCL_cryptography/src/*.hpp",
 			"paths" : 
 			[
-				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/cxxopts.hpp",
 				"D:/VisualStudio/repos/OpenCL_cryptography/src/utils/safe_allocator.hpp"
 			],
 			"recurse" : true

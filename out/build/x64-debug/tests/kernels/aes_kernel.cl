@@ -294,56 +294,109 @@ inline uchar16 load_column_major(int gid, __global const uchar *input) {
     );
 }
 
+inline uchar16 load_column_major_const(int gid, __constant const uchar *input) {
+    uchar16 s = vload16(gid, input);
+    return (uchar16)(
+        s.s0, s.s4, s.s8,  s.sc,
+        s.s1, s.s5, s.s9,  s.sd,
+        s.s2, s.s6, s.sa,  s.se,
+        s.s3, s.s7, s.sb,  s.sf
+    );
+}
+
+inline uchar16 encrypt_block(uchar16 input, __constant const uchar *round_keys) {
+    // First round
+    input = AddRoundKey(input, load_column_major_const(0, round_keys));
+
+    for (int i = 1; i < NUM_ROUND; ++i) {
+        input = SubBytes(input);
+        input = ShiftRows(input);
+        input = MixColumns(input);
+        input = AddRoundKey(input, load_column_major_const(i, round_keys));
+    }
+
+    // Last Round
+    input = SubBytes(input);
+    input = ShiftRows(input);
+    input = AddRoundKey(input, load_column_major_const(NUM_ROUND, round_keys));
+   
+    return input;
+
+}
+
+inline uchar16 decrypt_block(uchar16 input, __constant const uchar *round_keys) {
+     // First Round
+    input = AddRoundKey(input, load_column_major_const(NUM_ROUND, round_keys));
+
+    // num_round-1 to 1
+    for (int i = NUM_ROUND - 1; i > 0; --i) {
+        input = InvShiftRows(input);
+        input = InvSubBytes(input);
+        input = AddRoundKey(input, load_column_major_const(i, round_keys));
+        input = InvMixColumns(input);        
+    }
+
+    // Last Round
+    input = InvShiftRows(input);
+    input = InvSubBytes(input);
+    input = AddRoundKey(input, load_column_major_const(0, round_keys));
+
+    return input;
+}
+
 /** 
 * @brief Encrypt AES
 * @param input plain text n blocks
 * @param output cipher text n blocks
 * @param round_key expansion of key
 */
-__kernel void encrypt(__global const uchar *input, __global uchar *output, __global const uchar *round_key) {
+__kernel void encrypt_n(__global const uchar *input, __global uchar *output, __constant const uchar *round_keys, uint num_blocks) {
     int gid = get_global_id(0);
+    if (gid >= num_blocks) return;
+
     uchar16 state = load_column_major(gid, input);
+    uchar16 out_block = encrypt_block(state, round_keys);
+    vstore16(out_block, 0, output + gid * 16);
 
-    // First round
-    state = AddRoundKey(state, load_column_major(0, round_key));
+}
 
-    for (int i = 1; i < NUM_ROUND; ++i) {
-        state = SubBytes(state);
-        state = ShiftRows(state);
-        state = MixColumns(state);
-        state = AddRoundKey(state, load_column_major(i, round_key));
-    }
 
-    // Last Round
-    state = SubBytes(state);
-    state = ShiftRows(state);
-    state = AddRoundKey(state, load_column_major(NUM_ROUND, round_key));
+__kernel void decrypt_n(__global uchar *input, __global uchar *output, __constant uchar *round_keys, uint num_blocks) {
+    int gid = get_global_id(0);
+    if (gid >= num_blocks) return;
+
+    uchar16 state = load_column_major(gid, input);
+    uchar16 out_block = decrypt_block(state, round_keys);
+    vstore16(out_block, 0, output + gid * 16);
    
-    // Scrittura risultato finale
-    vstore16(state, gid, output);
 }
 
+// Increment and return counter with gid
+inline uchar16 make_counter(__constant const uchar *iv, uint block_index) {
+    uchar16 counter;
+    for (uint i = 0; i < 12; ++i)
+        counter[i] = iv[i];
+    counter[12] = (block_index >> 24) & 0xFF;
+    counter[13] = (block_index >> 16) & 0xFF;
+    counter[14] = (block_index >> 8) & 0xFF;
+    counter[15] = block_index & 0xFF;
+    return counter;
+}
 
-__kernel void decrypt(__global uchar *input, __global uchar *output, __global uchar *round_key) {
+__kernel void encrypt_ctr(__global const uchar *input, __global uchar *output, __constant const uchar *round_keys, 
+                        __constant const uchar *iv, uint num_blocks) {
     int gid = get_global_id(0);
-    uchar16 state = load_column_major(gid, input);
+    if (gid >= num_blocks) return;
 
-    // First Round
-    state = AddRoundKey(state, load_column_major(NUM_ROUND, round_key));
+    // Counter
+    uchar16 counter = make_counter(iv, gid);
 
-    // num_round-1 to 1
-    for (int i = NUM_ROUND - 1; i > 0; --i) {
-        state = InvShiftRows(state);
-        state = InvSubBytes(state);
-        state = AddRoundKey(state, load_column_major(i, round_key));
-        state = InvMixColumns(state);        
-    }
+    uchar16 out_block = encrypt_block(counter, round_keys);
 
-    // Last Round
-    state = InvShiftRows(state);
-    state = InvSubBytes(state);
-    state = AddRoundKey(state, load_column_major(0, round_key));
-
-    // Write the result
-    vstore16(state, gid, output);
+    // XOR
+    uchar16 plain_text = load_column_major(gid, input);
+    out_block = out_block ^ plain_text;
+    vstore16(out_block, 0, output + gid * 16);
 }
+
+

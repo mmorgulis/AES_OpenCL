@@ -1,0 +1,14 @@
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/OpenCL_cryptography.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/test.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/edit_cache.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/rebuild_cache.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/src/CMakeFiles/OpenCL_crypto_lib.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/src/CMakeFiles/test.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/src/CMakeFiles/edit_cache.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/src/CMakeFiles/rebuild_cache.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/tests/CMakeFiles/test_key.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/tests/CMakeFiles/test_enc.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/tests/CMakeFiles/speed_test.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/tests/CMakeFiles/test.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/tests/CMakeFiles/edit_cache.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/tests/CMakeFiles/rebuild_cache.dir

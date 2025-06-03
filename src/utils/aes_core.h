@@ -62,15 +62,6 @@ inline unsigned int key_length = 256;
 inline unsigned int num_rounds = 14;
 inline unsigned int num_round_keys = 15; // num_rounds + 1
 inline std::string aes_version_define = "-DAES_256"; 
-inline unsigned int num_blocks = 1; // size of _blocks of gcm
-
-/*
-inline unsigned int key_length = 128;
-inline unsigned int num_rounds = 10;
-inline unsigned int num_round_keys = 11; // num_rounds + 1
-inline std::string aes_version_define = "-DAES_128";
-inline unsigned int num_blocks = 1;
-*/
 
 crypto::safe_vector<uint8_t> generate_aes_key(unsigned int key_length);
 

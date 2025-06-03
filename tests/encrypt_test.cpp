@@ -5,7 +5,7 @@
 
 int main() {
 	bool test_passed = true;
-	find_platforms(platform, device);
+	AESOpenCL acc;
 	// AES 128
 	set_aes_parameters(128);
 	crypto::safe_vector<uint8_t> aes_key = {
@@ -26,7 +26,7 @@ int main() {
 	};
 
 	round_keys = key_schedule(aes_key);
-	aes_encrypt(plain_text, cipher_text, round_keys);
+	acc.aes_encrypt(plain_text, cipher_text, round_keys);
 	if (cipher_text == exp_cypher_text) {
 		std::cout << "Test 1 passato" << std::endl;
 	}
@@ -58,7 +58,7 @@ int main() {
 		0x1d, 0xfb, 0x97, 0x32
 	};
 	round_keys = key_schedule(aes_key);
-	aes_encrypt(plain_text, cipher_text, round_keys);
+	acc.aes_encrypt(plain_text, cipher_text, round_keys);
 	if (cipher_text == exp_cypher_text) {
 		std::cout << "Test 2 passato" << std::endl;
 	}
@@ -93,7 +93,7 @@ int main() {
 		0xa4, 0xe0, 0xa0, 0x91
 	};
 	round_keys = key_schedule(aes_key);
-	aes_encrypt(plain_text, cipher_text, round_keys);
+	acc.aes_encrypt(plain_text, cipher_text, round_keys);
 	if (cipher_text == exp_cypher_text) {
 		std::cout << "Test 3 passato" << std::endl;
 	}
@@ -130,7 +130,7 @@ int main() {
 		0xca, 0xbf, 0x90, 0x89
 	};
 	round_keys = key_schedule(aes_key);
-	aes_encrypt(plain_text, cipher_text, round_keys);
+	acc.aes_encrypt(plain_text, cipher_text, round_keys);
 	if (cipher_text == exp_cypher_text) {
 		std::cout << "Test 4 passato" << std::endl;
 	}

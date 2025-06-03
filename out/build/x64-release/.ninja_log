@@ -1,0 +1,11 @@
+# ninja log v6
+10	38	7702997439073786	D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-release/CMakeFiles/cmake.verify_globs	96aa23e32c1754a8
+70	1248	7702997439665647	src/CMakeFiles/OpenCL_crypto_lib.dir/utils/aes_mode.cpp.obj	6a279f7f6fe62403
+57	1253	7702997439525295	src/CMakeFiles/OpenCL_crypto_lib.dir/utils/aes_gcm.cpp.obj	36022c2bdf91c488
+51	1979	7702997439420226	src/CMakeFiles/OpenCL_crypto_lib.dir/utils/aes_ctr.cpp.obj	9887f6823d8db22d
+45	2094	7702997439420226	src/CMakeFiles/OpenCL_crypto_lib.dir/utils/aes_core.cpp.obj	ef394c905fc085fc
+76	2514	7702997439735899	tests/CMakeFiles/speed_test.dir/speed_test.cpp.obj	d9ac8e76bc5d66b7
+63	3329	7702997439580576	src/CMakeFiles/OpenCL_crypto_lib.dir/utils/aes_host.cpp.obj	1cc10f56512604ca
+40	3451	7702997439269271	src/CMakeFiles/OpenCL_crypto_lib.dir/main.cpp.obj	1468116929ed944e
+3451	3561	7702997473456987	src/OpenCL_crypto_lib.lib	4520a5623b7f9653
+3561	3894	7702997474576101	tests/speed_test.exe	a406388c96f2623d

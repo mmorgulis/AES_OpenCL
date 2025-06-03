@@ -1,5 +1,5 @@
 #TEST 1
-add_executable(test_key "key_expansion_test.cpp")
+add_executable(test_key "key_expansion_test.cpp" )
 target_link_libraries(test_key PRIVATE 
 	OpenCL_crypto_lib
 )  
@@ -11,3 +11,10 @@ target_link_libraries(test_enc PRIVATE
 	OpenCL_crypto_lib
 )  
 add_test(NAME test_enc COMMAND test_enc)
+
+#TEST 3
+add_executable(speed_test "speed_test.cpp")
+target_link_libraries(speed_test PRIVATE 
+	OpenCL_crypto_lib
+)  
+add_test(NAME speed_test COMMAND speed_test)

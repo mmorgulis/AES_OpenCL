@@ -1,5 +1,5 @@
 test_key 0 0
-test_enc 0 0
+test_enc 1 0.393873
+speed_test 1 0.863385
 ---
 test_key
-test_enc
