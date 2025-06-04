@@ -11,20 +11,6 @@
 	
 */
 
-// Passo la macro del .cpp per rendere il codice pi� snello	
-#if defined(AES_128)
-    #define AES_KEY_SIZE 128
-    #define NUM_ROUND 10
-
-#elif defined(AES_192)
-   #define AES_KEY_SIZE 192
-   #define NUM_ROUND 12
-
-#else
-    #define AES_KEY_SIZE 256
-    #define NUM_ROUND 14
-#endif
-
 __constant uchar SBox[256] = {
 	0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5,
     0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -304,8 +290,8 @@ inline uchar16 load_column_major_const(int gid, __constant const uchar *input) {
     );
 }
 
-inline uchar16 encrypt_block(uchar16 input, __constant const uchar *round_keys) {
-    // First round
+inline uchar16 encrypt_block(uchar16 input, __constant const uchar *round_keys, uint NUM_ROUND) {
+  // First round
     input = AddRoundKey(input, load_column_major_const(0, round_keys));
 
     for (int i = 1; i < NUM_ROUND; ++i) {
@@ -324,7 +310,7 @@ inline uchar16 encrypt_block(uchar16 input, __constant const uchar *round_keys) 
 
 }
 
-inline uchar16 decrypt_block(uchar16 input, __constant const uchar *round_keys) {
+inline uchar16 decrypt_block(uchar16 input, __constant const uchar *round_keys, uint NUM_ROUND) {
      // First Round
     input = AddRoundKey(input, load_column_major_const(NUM_ROUND, round_keys));
 
@@ -350,23 +336,25 @@ inline uchar16 decrypt_block(uchar16 input, __constant const uchar *round_keys) 
 * @param output cipher text n blocks
 * @param round_key expansion of key
 */
-__kernel void encrypt_n(__global const uchar *input, __global uchar *output, __constant const uchar *round_keys, uint num_blocks) {
+__kernel void encrypt_n(__global const uchar *input, __global uchar *output, __constant const uchar *round_keys, 
+        uint num_blocks, uint NUM_ROUND) {
     int gid = get_global_id(0);
     if (gid >= num_blocks) return;
 
     uchar16 state = load_column_major(gid, input);
-    uchar16 out_block = encrypt_block(state, round_keys);
+    uchar16 out_block = encrypt_block(state, round_keys, NUM_ROUND);
     vstore16(out_block, 0, output + gid * 16);
 
 }
 
 
-__kernel void decrypt_n(__global uchar *input, __global uchar *output, __constant uchar *round_keys, uint num_blocks) {
+__kernel void decrypt_n(__global const uchar *input, __global uchar *output, __constant uchar *round_keys, 
+        uint num_blocks, uint NUM_ROUND) {
     int gid = get_global_id(0);
     if (gid >= num_blocks) return;
 
     uchar16 state = load_column_major(gid, input);
-    uchar16 out_block = decrypt_block(state, round_keys);
+    uchar16 out_block = decrypt_block(state, round_keys, NUM_ROUND);
     vstore16(out_block, 0, output + gid * 16);
    
 }
@@ -380,23 +368,40 @@ inline uchar16 make_counter(__constant const uchar *iv, uint block_index) {
     counter[13] = (block_index >> 16) & 0xFF;
     counter[14] = (block_index >> 8) & 0xFF;
     counter[15] = block_index & 0xFF;
-    return counter;
+
+    // Must be in column major format
+    return (uchar16)(
+        counter[0],  counter[4],  counter[8],  counter[12],
+        counter[1],  counter[5],  counter[9],  counter[13],
+        counter[2],  counter[6],  counter[10], counter[14],
+        counter[3],  counter[7],  counter[11], counter[15]
+    );
+}
+
+inline uchar16 transpose_block(uchar16 in) {
+    return (uchar16)(
+        in.s0, in.s4, in.s8, in.sc,
+        in.s1, in.s5, in.s9, in.sd,
+        in.s2, in.s6, in.sa, in.se,
+        in.s3, in.s7, in.sb, in.sf
+    );
 }
 
 __kernel void encrypt_ctr(__global const uchar *input, __global uchar *output, __constant const uchar *round_keys, 
-                        __constant const uchar *iv, uint num_blocks) {
+                        __constant const uchar *iv, uint num_blocks, uint NUM_ROUND) {
     int gid = get_global_id(0);
     if (gid >= num_blocks) return;
 
     // Counter
-    uchar16 counter = make_counter(iv, gid);
+    uchar16 counter = make_counter(iv, gid + 1); // counter parte da 01
 
-    uchar16 out_block = encrypt_block(counter, round_keys);
+    counter = encrypt_block(counter, round_keys, NUM_ROUND);
 
     // XOR
-    uchar16 plain_text = load_column_major(gid, input);
-    out_block = out_block ^ plain_text;
-    vstore16(out_block, 0, output + gid * 16);
+    uchar16 plain_text = vload16(0, input + gid * 16);
+    counter = plain_text ^ counter;
+
+    vstore16(counter, 0, output + gid * 16);
 }
 
 

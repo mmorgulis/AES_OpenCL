@@ -5,6 +5,7 @@
 #define CL_HPP_TARGET_OPENCL_VERSION 300
 
 #include <CL/opencl.hpp> // cl::
+#include "aes_core.h"
 #include "safe_allocator.hpp" // crypto
 #include <span>
 #include <string>
@@ -24,10 +25,9 @@ private:
 	
 	cl::Buffer _plaintext_buf;
 	cl::Buffer _ciphertext_buf;
-	cl::Buffer _round_keys_buf;
 	
 	size_t _max_buffer_size = 128 * 1024 * 1024; // 128MB
-	unsigned int _max_round_key_size = 240;
+	unsigned int _round_key_size = num_round_keys * 16;
 	
 
 public:
@@ -57,7 +57,6 @@ public:
 	cl::Kernel& get_decrypt_kernel();
 	cl::Buffer& get_plaintext_buffer();
 	cl::Buffer& get_ciphertext_buffer();
-	cl::Buffer& get_round_keys_buffer();
 };
 
 class CTROpenCL {
@@ -68,7 +67,7 @@ private:
 	cl::Buffer _iv_buf;
 	unsigned int _iv_size = 12;
 	size_t _max_buffer_size = 128 * 1024 * 1024; // 128MB
-	unsigned int _max_round_key_size = 240;
+	unsigned int _round_key_size = num_round_keys * 16;
 
 public:
 	CTROpenCL();

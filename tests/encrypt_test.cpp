@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main() {
-	bool test_passed = true;
+	bool test_failed = false;
 	AESOpenCL acc;
 	// AES 128
 	set_aes_parameters(128);
@@ -32,7 +32,7 @@ int main() {
 	}
 	else {
 		std::cout << "Test 1 Fallito" << std::endl;
-		test_passed = false;
+		test_failed = true;
 	}
 
 	// AES 128
@@ -64,7 +64,7 @@ int main() {
 	}
 	else {
 		std::cout << "Test 2 Fallito" << std::endl;
-		test_passed = false;
+		test_failed = true;
 	}
 
 	// AES 192
@@ -99,7 +99,7 @@ int main() {
 	}
 	else {
 		std::cout << "Test 3 Fallito" << std::endl;
-		test_passed = false;
+		test_failed = true;
 	}
 
 	// AES 256
@@ -136,7 +136,7 @@ int main() {
 	}
 	else {
 		std::cout << "Test 4 Fallito" << std::endl;
-		test_passed = false;
+		test_failed = true;
 	}
-	return test_passed;
+	return test_failed;
 }

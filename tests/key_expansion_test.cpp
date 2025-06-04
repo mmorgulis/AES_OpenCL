@@ -4,7 +4,7 @@
 #include <iomanip>
 
 int main() {
-	bool test_passed = true;
+	bool test_failed = false;
 	// AES 128
 	set_aes_parameters(128);
 	crypto::safe_vector<uint8_t> aes_key;
@@ -34,7 +34,7 @@ int main() {
 		std::cout << "Test 1 Passato" << std::endl;
 	} else {
 		std::cout << "Test 1 Fallito" << std::endl;
-		test_passed = false;
+		test_failed = true;
 	}
 	
 	// AES 192
@@ -67,7 +67,7 @@ int main() {
 		std::cout << "Test 2 Passato" << std::endl;
 	} else {
 		std::cout << "Test 2 Fallito" << std::endl;
-		test_passed = false;
+		test_failed = true;
 	}
 
 	// AES 256
@@ -104,11 +104,11 @@ int main() {
 		std::cout << "Test 3 Passato" << std::endl;
 	} else {
 		std::cout << "Test 3 Fallito" << std::endl;
-		test_passed = false;
+		test_failed = true;
 	}
 	
 
-	return test_passed;
+	return test_failed;
 }
 
 	
