@@ -4,8 +4,9 @@
 #include <algorithm>
 #include <stdexcept>
 
-AES_CTR::~AES_CTR() {
-	clear();
+std::array<uint8_t, 12> AES_CTR::get_iv() const
+{
+	return _iv; // by copy
 }
 
 void AES_CTR::set_key(std::span<const uint8_t> key) {
@@ -63,6 +64,11 @@ std::string AES_CTR::decrypt(std::string_view plain_text) {
     
     decrypt(std::span<const uint8_t>(in), std::span<uint8_t>(out));
     return std::string(out.begin(), out.end());
+}
+
+void AES_CTR::encrypt_block(std::array<uint8_t, 16> &plain_text, std::array<uint8_t, 16> &cipher_text) {
+	AESOpenCL aes;
+	aes.aes_encrypt(plain_text, cipher_text, _round_keys);
 }
 
 void AES_CTR::clear() {

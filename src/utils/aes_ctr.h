@@ -11,15 +11,15 @@
 
 class AES_CTR : public AES_MODE
 {
-protected:
+private:
 	crypto::safe_vector<uint8_t> _key;
 	crypto::safe_vector<uint8_t> _round_keys;
-	std::array<uint8_t, 12> _iv = { 0 }; // more efficient dimension for iv
+	std::array<uint8_t, 12> _iv{}; // more efficient dimension for iv
 	CTROpenCL _accelerator;
 	
 public:
 	AES_CTR() = default;
-	~AES_CTR();
+	~AES_CTR() = default;
 	// Remove the possibility to copy the object mode
 	AES_CTR& operator=(const AES_CTR& g) = delete;
 	AES_CTR(const AES_CTR& g) = delete;
@@ -27,6 +27,7 @@ public:
 	// Functions to set attributes
 	void set_key(std::span<const uint8_t> key);
 	void set_iv(std::span<const uint8_t> iv);
+	std::array<uint8_t, 12> get_iv() const;
 	
 	std::span<const uint8_t> get_tag() const;
 
@@ -37,7 +38,11 @@ public:
 	void encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text);
 	void decrypt(std::span<const uint8_t> cipher_text, std::span<uint8_t> plain_text);
 
+	void encrypt_block(std::array<uint8_t, 16>& plain_text, std::array<uint8_t, 16>& cipher_text);
+
 	void clear();
+
+
 	
 };
 

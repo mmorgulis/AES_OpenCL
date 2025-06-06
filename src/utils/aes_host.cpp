@@ -130,7 +130,7 @@ void AESOpenCL::aes_encrypt(std::span<const uint8_t> plain_text, std::span<uint8
 		throw std::invalid_argument("Input too large for preallocated buffer");
 	}
 
-	unsigned int num_blocks = (unsigned int) plain_text.size() / 16;
+	size_t num_blocks = plain_text.size() / 16;
 
 	// Create round key buffer (small and not fixed dimension)
 	cl::Buffer round_keys_buf(_context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, round_keys.size(), (void*)round_keys.data());
@@ -142,8 +142,8 @@ void AESOpenCL::aes_encrypt(std::span<const uint8_t> plain_text, std::span<uint8
 	cl::KernelFunctor<cl::Buffer, cl::Buffer, cl::Buffer, cl_uint, cl_uint> encrypter(_encrypt_kernel);
 	// Execute the function
 	size_t global_work_size = num_blocks; // parallel work 1 work group for 1 aes block
-	cl_uint n_blocks = num_blocks;
-	cl_uint n_rounds = ((unsigned int) round_keys.size() / 16) - 1;
+	cl_uint n_blocks = static_cast<cl_uint>(num_blocks);
+	cl_uint n_rounds = static_cast<cl_uint>(round_keys.size() / 16) - 1;
 	//<std::cout << "Num WG: " << global_work_size << std::endl;
 	encrypter(cl::EnqueueArgs(_queue, cl::NDRange(global_work_size)),
 		_plaintext_buf, _ciphertext_buf, round_keys_buf, n_blocks, n_rounds);
@@ -167,7 +167,7 @@ void AESOpenCL::aes_decrypt(std::span<const uint8_t> cipher_text, std::span<uint
 		throw std::invalid_argument("Input too large for preallocated buffer");
 	}
 
-	unsigned int num_blocks = (unsigned int) plain_text.size() / 16;
+	size_t num_blocks = plain_text.size() / 16;
 
 	// Allocate buffer for round keys
 	cl::Buffer round_keys_buf(_context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, round_keys.size(), (void*)round_keys.data());
@@ -177,8 +177,8 @@ void AESOpenCL::aes_decrypt(std::span<const uint8_t> cipher_text, std::span<uint
 
 	cl::KernelFunctor<cl::Buffer, cl::Buffer, cl::Buffer, cl_uint, cl_uint> decypter(_decrypt_kernel);
 	size_t global_work_size = num_blocks; 
-	cl_uint n_blocks = num_blocks;
-	cl_uint n_rounds = ((unsigned int)round_keys.size() / 16) - 1;
+	cl_uint n_blocks = static_cast<cl_uint>(num_blocks);
+	cl_uint n_rounds = static_cast<cl_uint>(round_keys.size() / 16) - 1;
 	decypter(cl::EnqueueArgs(_queue, cl::NDRange(global_work_size)), _ciphertext_buf, _plaintext_buf, round_keys_buf, n_blocks, n_rounds);
 	_queue.enqueueReadBuffer(_plaintext_buf, CL_TRUE, 0, plain_text.size(), plain_text.data());	
 	_queue.finish();
@@ -220,9 +220,9 @@ void CTROpenCL::aes_ctr_encrypt(std::span<const uint8_t> plain_text, std::span<u
 		throw std::invalid_argument("Input too large for preallocated buffer");
 	}
 
-	// Ceil blocks
-	unsigned int num_blocks = (unsigned int)((plain_text.size() + 15) / 16);
-	size_t padded_size = (size_t) num_blocks * 16;
+	// Ceil number of blocks
+	size_t num_blocks = (plain_text.size() + 15) / 16;
+	size_t padded_size = num_blocks * 16;
 
 	// Allocate round_key buffer
 	cl::Buffer round_keys_buf(_aes.get_context(), CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, round_keys.size(), (void*)round_keys.data());
@@ -240,8 +240,8 @@ void CTROpenCL::aes_ctr_encrypt(std::span<const uint8_t> plain_text, std::span<u
 	}
 
 	size_t global_work_size = num_blocks; // parallel work 1 work group for 1 aes block
-	cl_uint n_blocks = num_blocks;
-	cl_uint n_rounds = ((unsigned int)round_keys.size() / 16) - 1;
+	cl_uint n_blocks = static_cast<unsigned int>(num_blocks);
+	cl_uint n_rounds = static_cast<unsigned int>(round_keys.size() / 16) - 1;
 	encrypter(cl::EnqueueArgs(_aes.get_queue(), cl::NDRange(global_work_size)),
 		_aes.get_plaintext_buffer(), _aes.get_ciphertext_buffer(), round_keys_buf, _iv_buf, n_blocks, n_rounds);
 	// Read data

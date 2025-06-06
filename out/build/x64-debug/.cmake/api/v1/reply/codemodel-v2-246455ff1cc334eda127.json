@@ -1,0 +1,140 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "src",
+					"jsonFile" : "directory-src-Debug-c94b7c2814d5a21df52c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "tests",
+					"jsonFile" : "directory-tests-Debug-70e4927a02b591d5c1f8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "tests",
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "OpenCL_cryptography",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "OpenCL_crypto_lib::@145eef247bfb46b6828c",
+					"jsonFile" : "target-OpenCL_crypto_lib-Debug-74e0583b52f1ef621f25.json",
+					"name" : "OpenCL_crypto_lib",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "OpenCL_cryptography::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-OpenCL_cryptography-Debug-586450d385b76797e4fd.json",
+					"name" : "OpenCL_cryptography",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ghash_test::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-ghash_test-Debug-63b57ddfb45a0505160b.json",
+					"name" : "ghash_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "speed_test::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-speed_test-Debug-9520657223685ac4b2c5.json",
+					"name" : "speed_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test_enc::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_enc-Debug-82df3953abdfd3c23288.json",
+					"name" : "test_enc",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test_key::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_key-Debug-86ade063c1ea72823ead.json",
+					"name" : "test_key",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug",
+		"source" : "D:/VisualStudio/repos/OpenCL_cryptography"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

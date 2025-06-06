@@ -10,3 +10,5 @@ add_test(test_enc "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug
 set_tests_properties(test_enc PROPERTIES  _BACKTRACE_TRIPLES "D:/VisualStudio/repos/OpenCL_cryptography/tests/CMakeLists.txt;13;add_test;D:/VisualStudio/repos/OpenCL_cryptography/tests/CMakeLists.txt;0;")
 add_test(speed_test "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/speed_test.exe")
 set_tests_properties(speed_test PROPERTIES  _BACKTRACE_TRIPLES "D:/VisualStudio/repos/OpenCL_cryptography/tests/CMakeLists.txt;20;add_test;D:/VisualStudio/repos/OpenCL_cryptography/tests/CMakeLists.txt;0;")
+add_test(ghash_test "D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/ghash_test.exe")
+set_tests_properties(ghash_test PROPERTIES  _BACKTRACE_TRIPLES "D:/VisualStudio/repos/OpenCL_cryptography/tests/CMakeLists.txt;27;add_test;D:/VisualStudio/repos/OpenCL_cryptography/tests/CMakeLists.txt;0;")

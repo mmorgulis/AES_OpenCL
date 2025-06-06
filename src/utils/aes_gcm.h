@@ -3,19 +3,16 @@
 
 #include "aes_mode.h"
 #include "aes_ctr.h"
+#include "ghash.h"
 #include <memory>
 #include <span>
 
 class AES_GCM : public AES_MODE {
 private:
 	AES_CTR ctr; // Composition
-	crypto::safe_vector<uint8_t> _aad;
-	std::array<uint8_t, 16> _tag;
-
-	// Tables (byte level) for mult in GF(2^218)
-	// 16 tables, with 256 values, each values of 16 bytes
-	std::array<std::array<std::array<uint8_t, 16>, 256>, 16> m_table; // 64 KB
-	std::array<uint8_t, 16> m_H;
+	GHASH ghash;
+public:
+	std::array<uint8_t, 16> compute_H0();
 
 public:
 	AES_GCM() = default;
@@ -28,13 +25,12 @@ public:
 	void set_key(std::span<const uint8_t> key);
 	void set_iv(std::span<const uint8_t> iv);
 	void set_aad(std::span<const uint8_t> aad);
-	void set_tag(std::span<const uint8_t> tag);
-	std::span<const uint8_t> get_tag() const;
+	std::array<uint8_t, 16> get_tag() const;
 
 	std::string encrypt(std::string_view plain_text) override;
+	void encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text);
 	std::string decrypt(std::string_view cipher_text) override;
-
-	void precompute_table(std::span<const uint8_t> counter);
+	void decrypt(std::span<uint8_t> cipher_text, std::span<const uint8_t> plain_text);
 
 	void clear();
 

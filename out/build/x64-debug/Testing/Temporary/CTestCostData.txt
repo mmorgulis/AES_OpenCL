@@ -1,4 +1,5 @@
-test_key 2 0.0821336
-test_enc 8 0.080647
-speed_test 12 0.0641301
+test_key 4 0.0323563
+test_enc 10 0.0688577
+speed_test 14 0.0938381
+ghash_test 1 0.0165586
 ---
