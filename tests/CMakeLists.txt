@@ -19,9 +19,16 @@ target_link_libraries(speed_test PRIVATE
 )  
 add_test(NAME speed_test COMMAND speed_test)
 
-#TEST 3
+#TEST 4
 add_executable(ghash_test "ghash_test.cpp")
 target_link_libraries(ghash_test PRIVATE 
 	OpenCL_crypto_lib
 )  
 add_test(NAME ghash_test COMMAND ghash_test)
+
+#TEST 5
+add_executable(gcm_test "ghash_test.cpp")
+target_link_libraries(gcm_test PRIVATE 
+	OpenCL_crypto_lib
+)  
+add_test(NAME gcm_test COMMAND gcm_test)

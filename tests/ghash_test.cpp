@@ -21,7 +21,8 @@ int main() {
 
     GHASH g;
     g.set_H(H);
-    std::array<uint8_t, 16> ghash = g.compute_ghash(C);
+    g.compute_ghash(C);
+    std::array<uint8_t, 16> ghash = g.get_hash();
     if (ghash == GHASH_expected) {
         std::cout << "Test Passato" << std::endl;
     }

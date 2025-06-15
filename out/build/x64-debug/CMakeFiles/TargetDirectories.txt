@@ -10,6 +10,7 @@ D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/t
 D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/test_enc.dir
 D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/speed_test.dir
 D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/ghash_test.dir
+D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/gcm_test.dir
 D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/test.dir
 D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/edit_cache.dir
 D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests/CMakeFiles/rebuild_cache.dir

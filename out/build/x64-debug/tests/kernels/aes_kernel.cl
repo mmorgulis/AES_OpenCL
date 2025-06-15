@@ -1,16 +1,3 @@
-/**
-	Nella libreria Botan le chiavi sono passate come
-	stato interno dell'oggetto. Su OpenCL questa cosa
-	non � molto possibile in quanto non � presente una
-	reale astrazione di classi/oggetti. 
-	La struttura che ho pensato � quindi di creare le chiavi
-	sul device (all'interno del main) tramite la libreria 
-	botan, inserirle nel contesto di un safe_vector (un vettore
-	con un allocator che azzera la memoria prima di uscire) e 
-	passarle (come vettori di uchar(=byte)) al kernel come parametro.
-	
-*/
-
 __constant uchar SBox[256] = {
 	0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5,
     0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -142,21 +129,22 @@ inline uchar16 InvSubBytes(uchar16 s) {
     );
 }
 
+// Row-major version
 inline uchar16 ShiftRows(uchar16 s) {
-    return (uchar16)(   
-        s.s0, s.s1, s.s2, s.s3,
-        s.s5, s.s6, s.s7, s.s4,
-        s.sa, s.sb, s.s8, s.s9,
-        s.sf, s.sc, s.sd, s.se
+    return (uchar16)(
+        s.s0, s.s5, s.sa, s.sf,
+        s.s4, s.s9, s.se, s.s3,
+        s.s8, s.sd, s.s2, s.s7,
+        s.sc, s.s1, s.s6, s.sb
     );
 }
 
 inline uchar16 InvShiftRows(uchar16 s) {
     return (uchar16)(
-        s.s0, s.s1, s.s2, s.s3,
-        s.s7, s.s4, s.s5, s.s6,
-        s.sa, s.sb, s.s8, s.s9,
-        s.sd, s.se, s.sf, s.sc  
+        s.s0, s.sd, s.sa, s.s7,
+        s.s4, s.s1, s.se, s.sb,
+        s.s8, s.s5, s.s2, s.sf,
+        s.sc, s.s9, s.s6, s.s3  
     );
 }
 
@@ -223,21 +211,21 @@ inline uchar16 MixColumns(uchar16 s) {
     uchar16 result;
 
     // Mix every columns separately
-    uchar4 c0 = (uchar4) (s.s0, s.s4, s.s8, s.sc);
+    uchar4 c0 = (uchar4) (s.s0, s.s1, s.s2, s.s3);
     c0 = MixOneColumn(c0);
-    result.s0 = c0.s0; result.s4 = c0.s1; result.s8 = c0.s2; result.sc = c0.s3;
+    result.s0 = c0.s0; result.s1 = c0.s1; result.s2 = c0.s2; result.s3 = c0.s3;
 
-    uchar4 c1 = (uchar4)(s.s1, s.s5, s.s9, s.sd);
+    uchar4 c1 = (uchar4)(s.s4, s.s5, s.s6, s.s7);
     c1 = MixOneColumn(c1);
-    result.s1 = c1.s0; result.s5 = c1.s1; result.s9 = c1.s2; result.sd = c1.s3;
+    result.s4 = c1.s0; result.s5 = c1.s1; result.s6 = c1.s2; result.s7 = c1.s3;
 
-    uchar4 c2 = (uchar4)(s.s2, s.s6, s.sa, s.se);
+    uchar4 c2 = (uchar4)(s.s8, s.s9, s.sa, s.sb);
     c2 = MixOneColumn(c2);
-    result.s2 = c2.s0; result.s6 = c2.s1; result.sa = c2.s2; result.se = c2.s3;
+    result.s8 = c2.s0; result.s9 = c2.s1; result.sa = c2.s2; result.sb = c2.s3;
     
-    uchar4 c3 = (uchar4)(s.s3, s.s7, s.sb, s.sf);
+    uchar4 c3 = (uchar4)(s.sc, s.sd, s.se, s.sf);
     c3 = MixOneColumn(c3);
-    result.s3 = c3.s0; result.s7 = c3.s1; result.sb = c3.s2; result.sf = c3.s3;
+    result.sc = c3.s0; result.sd = c3.s1; result.se = c3.s2; result.sf = c3.s3;
 
     return result;
 }
@@ -246,21 +234,21 @@ inline uchar16 InvMixColumns(uchar16 s) {
     uchar16 result;
 
     // Mix every columns separately
-    uchar4 c0 = (uchar4) (s.s0, s.s4, s.s8, s.sc);
+    uchar4 c0 = (uchar4) (s.s0, s.s1, s.s2, s.s3);
     c0 = InvMixOneColumn(c0);
-    result.s0 = c0.s0; result.s4 = c0.s1; result.s8 = c0.s2; result.sc = c0.s3;
+    result.s0 = c0.s0; result.s1 = c0.s1; result.s2 = c0.s2; result.s3 = c0.s3;
 
-    uchar4 c1 = (uchar4)(s.s1, s.s5, s.s9, s.sd);
+    uchar4 c1 = (uchar4)(s.s4, s.s5, s.s6, s.s7);
     c1 = InvMixOneColumn(c1);
-    result.s1 = c1.s0; result.s5 = c1.s1; result.s9 = c1.s2; result.sd = c1.s3;
+    result.s4 = c1.s0; result.s5 = c1.s1; result.s6 = c1.s2; result.s7 = c1.s3;
 
-    uchar4 c2 = (uchar4)(s.s2, s.s6, s.sa, s.se);
+    uchar4 c2 = (uchar4)(s.s8, s.s9, s.sa, s.sb);
     c2 = InvMixOneColumn(c2);
-    result.s2 = c2.s0; result.s6 = c2.s1; result.sa = c2.s2; result.se = c2.s3;
+    result.s8 = c2.s0; result.s9 = c2.s1; result.sa = c2.s2; result.sb = c2.s3;
     
-    uchar4 c3 = (uchar4)(s.s3, s.s7, s.sb, s.sf);
+    uchar4 c3 = (uchar4)(s.sc, s.sd, s.se, s.sf);
     c3 = InvMixOneColumn(c3);
-    result.s3 = c3.s0; result.s7 = c3.s1; result.sb = c3.s2; result.sf = c3.s3;
+    result.sc = c3.s0; result.sd = c3.s1; result.se = c3.s2; result.sf = c3.s3;
 
     return result;
 }
@@ -269,42 +257,21 @@ inline uchar16 AddRoundKey(uchar16 s, uchar16 key) {
     return s ^ key;
 }
 
-// AES standard organizes the bytes "column major" so I have to switch from normal vload
-inline uchar16 load_column_major(int gid, __global const uchar *input) {
-    uchar16 s = vload16(gid, input);
-    return (uchar16)(
-        s.s0, s.s4, s.s8,  s.sc,
-        s.s1, s.s5, s.s9,  s.sd,
-        s.s2, s.s6, s.sa,  s.se,
-        s.s3, s.s7, s.sb,  s.sf
-    );
-}
-
-inline uchar16 load_column_major_const(int gid, __constant const uchar *input) {
-    uchar16 s = vload16(gid, input);
-    return (uchar16)(
-        s.s0, s.s4, s.s8,  s.sc,
-        s.s1, s.s5, s.s9,  s.sd,
-        s.s2, s.s6, s.sa,  s.se,
-        s.s3, s.s7, s.sb,  s.sf
-    );
-}
-
-inline uchar16 encrypt_block(uchar16 input, __constant const uchar *round_keys, uint NUM_ROUND) {
-  // First round
-    input = AddRoundKey(input, load_column_major_const(0, round_keys));
+inline uchar16 encrypt_block(uchar16 input, __constant const uchar16 *round_keys, uint NUM_ROUND) {
+    // First round
+    input = AddRoundKey(input, round_keys[0]);
 
     for (int i = 1; i < NUM_ROUND; ++i) {
         input = SubBytes(input);
         input = ShiftRows(input);
         input = MixColumns(input);
-        input = AddRoundKey(input, load_column_major_const(i, round_keys));
+        input = AddRoundKey(input, round_keys[i]);
     }
 
     // Last Round
     input = SubBytes(input);
     input = ShiftRows(input);
-    input = AddRoundKey(input, load_column_major_const(NUM_ROUND, round_keys));
+    input = AddRoundKey(input, round_keys[NUM_ROUND]);
    
     return input;
 
@@ -312,20 +279,20 @@ inline uchar16 encrypt_block(uchar16 input, __constant const uchar *round_keys, 
 
 inline uchar16 decrypt_block(uchar16 input, __constant const uchar *round_keys, uint NUM_ROUND) {
      // First Round
-    input = AddRoundKey(input, load_column_major_const(NUM_ROUND, round_keys));
+    input = AddRoundKey(input, vload16(NUM_ROUND, round_keys));
 
     // num_round-1 to 1
     for (int i = NUM_ROUND - 1; i > 0; --i) {
         input = InvShiftRows(input);
         input = InvSubBytes(input);
-        input = AddRoundKey(input, load_column_major_const(i, round_keys));
+        input = AddRoundKey(input, vload16(i, round_keys));
         input = InvMixColumns(input);        
     }
 
     // Last Round
     input = InvShiftRows(input);
     input = InvSubBytes(input);
-    input = AddRoundKey(input, load_column_major_const(0, round_keys));
+    input = AddRoundKey(input, vload16(0, round_keys));
 
     return input;
 }
@@ -336,12 +303,12 @@ inline uchar16 decrypt_block(uchar16 input, __constant const uchar *round_keys, 
 * @param output cipher text n blocks
 * @param round_key expansion of key
 */
-__kernel void encrypt_n(__global const uchar *input, __global uchar *output, __constant const uchar *round_keys, 
+__kernel void encrypt_n(__global const uchar *input, __global uchar *output, __constant const uchar16 *round_keys, 
         uint num_blocks, uint NUM_ROUND) {
     int gid = get_global_id(0);
     if (gid >= num_blocks) return;
 
-    uchar16 state = load_column_major(gid, input);
+    uchar16 state = vload16(gid, input);
     uchar16 out_block = encrypt_block(state, round_keys, NUM_ROUND);
     vstore16(out_block, 0, output + gid * 16);
 
@@ -353,7 +320,7 @@ __kernel void decrypt_n(__global const uchar *input, __global uchar *output, __c
     int gid = get_global_id(0);
     if (gid >= num_blocks) return;
 
-    uchar16 state = load_column_major(gid, input);
+    uchar16 state = vload16(gid, input);
     uchar16 out_block = decrypt_block(state, round_keys, NUM_ROUND);
     vstore16(out_block, 0, output + gid * 16);
    
@@ -364,18 +331,15 @@ inline uchar16 make_counter(__constant const uchar *iv, uint block_index) {
     uchar16 counter;
     for (uint i = 0; i < 12; ++i)
         counter[i] = iv[i];
+
     counter[12] = (block_index >> 24) & 0xFF;
     counter[13] = (block_index >> 16) & 0xFF;
     counter[14] = (block_index >> 8) & 0xFF;
     counter[15] = block_index & 0xFF;
 
-    // Must be in column major format
-    return (uchar16)(
-        counter[0],  counter[4],  counter[8],  counter[12],
-        counter[1],  counter[5],  counter[9],  counter[13],
-        counter[2],  counter[6],  counter[10], counter[14],
-        counter[3],  counter[7],  counter[11], counter[15]
-    );
+    // Row major format
+    return counter;
+
 }
 
 inline uchar16 transpose_block(uchar16 in) {
@@ -387,19 +351,18 @@ inline uchar16 transpose_block(uchar16 in) {
     );
 }
 
-__kernel void encrypt_ctr(__global const uchar *input, __global uchar *output, __constant const uchar *round_keys, 
+__kernel void encrypt_ctr(__global const uchar *input, __global uchar *output, __constant const uchar16 *round_keys, 
                         __constant const uchar *iv, uint num_blocks, uint NUM_ROUND) {
     int gid = get_global_id(0);
     if (gid >= num_blocks) return;
 
     // Counter
-    uchar16 counter = make_counter(iv, gid + 1); // counter parte da 01
-
-    counter = encrypt_block(counter, round_keys, NUM_ROUND);
+    uchar16 counter = make_counter(iv, gid + 2); // counter parte da 02 NIST SP 800-38D
+    counter = encrypt_block(counter, round_keys, NUM_ROUND); // keystream
 
     // XOR
     uchar16 plain_text = vload16(0, input + gid * 16);
-    counter = plain_text ^ counter;
+    counter = counter ^ plain_text; // cipher_text
 
     vstore16(counter, 0, output + gid * 16);
 }

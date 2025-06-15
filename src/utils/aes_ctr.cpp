@@ -41,7 +41,7 @@ void AES_CTR::encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> ci
 
 
 // API semplice, prende stringa restituisce stringa
-std::string AES_CTR::encrypt(std::string_view plain_text) {
+std::string AES_CTR::encrypt(const std::string_view plain_text) {
 	crypto::safe_vector<uint8_t> in(plain_text.begin(), plain_text.end());
     crypto::safe_vector<uint8_t> out(in.size());
     
@@ -58,7 +58,7 @@ void AES_CTR::decrypt(std::span<const uint8_t> cipher_text, std::span<uint8_t> p
 }
 
 // API 
-std::string AES_CTR::decrypt(std::string_view plain_text) {
+std::string AES_CTR::decrypt(const std::string_view plain_text) {
 	crypto::safe_vector<uint8_t> in(plain_text.begin(), plain_text.end());
     crypto::safe_vector<uint8_t> out(in.size());
     

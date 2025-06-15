@@ -33,8 +33,8 @@ public:
 
 	bool control_attributes();
 
-	std::string encrypt(std::string_view plain_text) override;
-	std::string decrypt(std::string_view cipher_text) override;
+	std::string encrypt(const std::string_view plain_text) override;
+	std::string decrypt(const std::string_view cipher_text) override;
 	void encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text);
 	void decrypt(std::span<const uint8_t> cipher_text, std::span<uint8_t> plain_text);
 

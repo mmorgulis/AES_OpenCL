@@ -19,8 +19,9 @@ std::array<uint8_t, 16> GHASH::get_tag() const
 	return _tag;
 }
 
-void GHASH::update(std::span<const uint8_t> in)
+std::array<uint8_t, 16> GHASH::get_hash() const
 {
+	return _Y;
 }
 
 inline static std::array<uint8_t, 16> xor_array(const std::array<uint8_t, 16>& a, const std::array<uint8_t, 16>& b) {
@@ -31,34 +32,48 @@ inline static std::array<uint8_t, 16> xor_array(const std::array<uint8_t, 16>& a
 	return x;
 }
 
+void GHASH::update(std::span<const uint8_t> aad_bytes)
+{
+	std::array<uint8_t, 16> tmp = { 0 };
+	for (size_t i = 0; i < aad_bytes.size(); i += 16) {
+		std::array<uint8_t, 16> block = { 0 };
+		size_t copy_bit = (aad_bytes.size() - i >= 16) ? 16 : aad_bytes.size() - i;
+		std::copy_n(aad_bytes.begin() + i, copy_bit, block.begin());
+
+		tmp = xor_array(_Y, block);
+		_Y = multGF128_plain(tmp);
+	}
+}
+
 /*
 * Devo prendere tutti i blocchi del aad, ciphertext e lunghezze e
 * avere come output un solo blocco da 16 byte. Per farlo processo
 * in catena tutti i blocchi dell'aad con GMULT128 e ho in uscita
 * un blocco e poi da questo lo faccio con il ciphertext e le lunghezze
 */
-std::array<uint8_t, 16> GHASH::compute_ghash(std::span<uint8_t> cipher_text)
+void GHASH::compute_ghash(std::span<const uint8_t> cipher_text)
 {
 	std::array<uint8_t, 16> tmp = { 0 };
+	std::array<uint8_t, 16> tmp_Y = { 0 };
 
 	// AAD
 	for (size_t i = 0; i < _aad.size(); i += 16) {
 		std::array<uint8_t, 16> block = { 0 };
-		unsigned int copy_bit = (_aad.size() - i >= 16) ? 16 : _aad.size() - i;
+		size_t copy_bit = (_aad.size() - i >= 16) ? 16 : _aad.size() - i;
 		std::copy_n(_aad.begin() + i, copy_bit, block.begin());
 
-		tmp = xor_array(_Y, block);
-		_Y = multGF128_plain(tmp);
+		tmp = xor_array(tmp_Y, block);
+		tmp_Y = multGF128_plain(tmp);
 	}
 
 	// CIPHERTEXT
 	for (size_t i = 0; i < cipher_text.size(); i += 16) {
 		std::array<uint8_t, 16> block = { 0 };
-		unsigned int copy_bit = (cipher_text.size() - i >= 16) ? 16 : cipher_text.size() - i;
+		size_t copy_bit = (cipher_text.size() - i >= 16) ? 16 : cipher_text.size() - i;
 		std::copy_n(cipher_text.begin() + i, copy_bit, block.begin());
 
-		tmp = xor_array(_Y, block);
-		_Y = multGF128_plain(tmp);
+		tmp = xor_array(tmp_Y, block);
+		tmp_Y = multGF128_plain(tmp);
 	}
 
 	// LENGTH A B
@@ -67,20 +82,21 @@ std::array<uint8_t, 16> GHASH::compute_ghash(std::span<uint8_t> cipher_text)
 	uint64_t cip_bits = static_cast<uint64_t>(cipher_text.size()) * 8;
 
 	for (int i = 0; i < 8; ++i) {
-		length_block[7 - i] = static_cast<uint8_t>((aad_bits >> (i * 8)) & 0xFF);
-		length_block[15 - i] = static_cast<uint8_t>((cip_bits >> (i * 8)) & 0xFF);
+		length_block[i] = static_cast<uint8_t>((aad_bits >> (56 - 8 * i)) & 0xFF);
+		length_block[8 + i] = static_cast<uint8_t>((cip_bits >> (56 - 8 * i)) & 0xFF);
 	}
 
-	tmp = xor_array(_Y, length_block);
-	_Y = multGF128_plain(tmp);
+	tmp = xor_array(tmp_Y, length_block);
+	tmp_Y = multGF128_plain(tmp);
 
-	return _Y;
+	_Y = tmp_Y;
+
 }
 
-std::array<uint8_t, 16> GHASH::compute_tag()
+void GHASH::compute_tag(std::span<const uint8_t> cipher_text)
 {
+	compute_ghash(cipher_text);
 	_tag = xor_array(_Y, _EJ0);
-	return _tag;
 }
 
 inline static std::array<uint8_t, 16> mult2_and_reduce(const std::array<uint8_t, 16>& row) {
@@ -99,19 +115,7 @@ inline static std::array<uint8_t, 16> mult2_and_reduce(const std::array<uint8_t,
 	
 }
 
-
-void GHASH::precompute_tables()
-{
-	
-
-}
-
-std::array<uint8_t, 16> GHASH::multGF128(std::array<uint8_t, 16> x) {
-	std::array<uint8_t, 16> result = { 0 };
-	return result;
-}
-
-std::array<uint8_t, 16> GHASH::multGF128_plain(std::array<uint8_t, 16> X) const {
+std::array<uint8_t, 16> GHASH::multGF128_plain(const std::array<uint8_t, 16> &X) const {
 	std::array<uint8_t, 16> Z = {0};        
 	std::array<uint8_t, 16> V = _H;          
 
@@ -140,7 +144,7 @@ void GHASH::set_H(const std::array<uint8_t, 16> &H)
 {
 	std::copy(H.begin(), H.end(), _H.begin());
 
-	precompute_tables(); //set tables
+	//precompute_tables(); //set tables
 }
 
 void GHASH::set_EJ0(const std::array<uint8_t, 16>& J)
@@ -153,9 +157,9 @@ void GHASH::clear() {
 	_tag.fill(0);
 	_H.fill(0);
 	_EJ0.fill(0);
-	for (auto& table : _m_table) {
+	/*for (auto& table : _m_table) {
 		for (auto& row : table) {
 			row.fill(0);
 		}
-	}
+	}*/
 }

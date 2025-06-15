@@ -436,6 +436,43 @@ build tests\ghash_test.exe: CXX_EXECUTABLE_LINKER__ghash_test_Debug tests\CMakeF
   TARGET_IMPLIB = tests\ghash_test.lib
   TARGET_PDB = tests\ghash_test.pdb
 
+# =============================================================================
+# Object build statements for EXECUTABLE target gcm_test
+
+
+#############################################
+# Order-only phony target for gcm_test
+
+build cmake_object_order_depends_target_gcm_test: phony || cmake_object_order_depends_target_OpenCL_crypto_lib
+
+build tests\CMakeFiles\gcm_test.dir\ghash_test.cpp.obj: CXX_COMPILER__gcm_test_unscanned_Debug D$:\VisualStudio\repos\OpenCL_cryptography\tests\ghash_test.cpp || cmake_object_order_depends_target_gcm_test
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -Zi
+  INCLUDES = -ID:\VisualStudio\repos\OpenCL_cryptography\src -ID:\VisualStudio\repos\OpenCL_cryptography\include -external:ID:\Botan-3.8.1\build-output\include\botan-3 -external:W0
+  OBJECT_DIR = tests\CMakeFiles\gcm_test.dir
+  OBJECT_FILE_DIR = tests\CMakeFiles\gcm_test.dir
+  TARGET_COMPILE_PDB = tests\CMakeFiles\gcm_test.dir\
+  TARGET_PDB = tests\gcm_test.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target gcm_test
+
+
+#############################################
+# Link the executable tests\gcm_test.exe
+
+build tests\gcm_test.exe: CXX_EXECUTABLE_LINKER__gcm_test_Debug tests\CMakeFiles\gcm_test.dir\ghash_test.cpp.obj | src\OpenCL_crypto_lib.lib D$:\Botan-3.8.1\build-output\lib\botan-3.lib D$:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib || src\OpenCL_crypto_lib.lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -Zi
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = src\OpenCL_crypto_lib.lib  D:\Botan-3.8.1\build-output\lib\botan-3.lib  D:\VisualStudio\repos\OpenCL_cryptography\lib\OpenCL.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = tests\CMakeFiles\gcm_test.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = tests\CMakeFiles\gcm_test.dir\
+  TARGET_FILE = tests\gcm_test.exe
+  TARGET_IMPLIB = tests\gcm_test.lib
+  TARGET_PDB = tests\gcm_test.pdb
+
 
 #############################################
 # Utility command for test
@@ -480,6 +517,10 @@ build OpenCL_crypto_lib.lib: phony src\OpenCL_crypto_lib.lib
 
 build OpenCL_cryptography: phony OpenCL_cryptography.exe
 
+build gcm_test: phony tests\gcm_test.exe
+
+build gcm_test.exe: phony tests\gcm_test.exe
+
 build ghash_test: phony tests\ghash_test.exe
 
 build ghash_test.exe: phony tests\ghash_test.exe
@@ -518,7 +559,7 @@ build src\all: phony src\OpenCL_crypto_lib.lib
 #############################################
 # Folder: D:/VisualStudio/repos/OpenCL_cryptography/out/build/x64-debug/tests
 
-build tests\all: phony tests\test_key.exe tests\test_enc.exe tests\speed_test.exe tests\ghash_test.exe
+build tests\all: phony tests\test_key.exe tests\test_enc.exe tests\speed_test.exe tests\ghash_test.exe tests\gcm_test.exe
 
 # =============================================================================
 # Built-in targets
