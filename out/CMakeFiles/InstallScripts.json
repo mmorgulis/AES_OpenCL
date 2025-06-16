@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"D:/VisualStudio/repos/OpenCL_cryptography/out/cmake_install.cmake",
-		"D:/VisualStudio/repos/OpenCL_cryptography/out/tests/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

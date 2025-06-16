@@ -6,4 +6,13 @@ target_link_libraries(OpenCL_crypto_lib
     PUBLIC
     Botan::Botan
     OpenCL
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+)
+
+set_target_properties(OpenCL_crypto_lib PROPERTIES
+    AUTOMOC ON
+    AUTOUIC ON
+    AUTORCC ON
 )

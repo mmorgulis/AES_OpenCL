@@ -1,6 +1,0 @@
-D:/VisualStudio/repos/OpenCL_cryptography/out/CMakeFiles/OpenCL_cryptography.dir
-D:/VisualStudio/repos/OpenCL_cryptography/out/CMakeFiles/RUN_TESTS.dir
-D:/VisualStudio/repos/OpenCL_cryptography/out/CMakeFiles/ALL_BUILD.dir
-D:/VisualStudio/repos/OpenCL_cryptography/out/CMakeFiles/ZERO_CHECK.dir
-D:/VisualStudio/repos/OpenCL_cryptography/out/tests/CMakeFiles/test_chiavi.dir
-D:/VisualStudio/repos/OpenCL_cryptography/out/tests/CMakeFiles/RUN_TESTS.dir

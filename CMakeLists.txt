@@ -6,20 +6,24 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-
 # Nome progetto
-project(OpenCL_cryptography LANGUAGES CXX)
+project(AES_OpenCL LANGUAGES CXX)
 
 # Standard C++
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if(NOT DEFINED ENV{Qt6_DIR})
+  message(FATAL_ERROR "La variabile d'ambiente 'Qt6_DIR' non è definita.")
+endif()
+
 if(NOT DEFINED ENV{Botan_DIR})
   message(FATAL_ERROR "La variabile d'ambiente 'Botan_DIR' non è definita.")
 endif()
 set(Botan_DIR "$ENV{Botan_DIR}")
 
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 find_package(Botan REQUIRED)
 #message(STATUS "Prefix ${_Botan_PREFIX}")
 #message(STATUS "Lib ${_Botan_shared_lib}")
@@ -39,14 +43,24 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     "include/*.cpp"
     "include/*.hpp"
     "include/*.h"
+    "src/*.ui"
 )   
 
 # Crea l'eseguibile
-add_executable(OpenCL_cryptography ${SOURCES})
+add_executable(AES_OpenCL ${SOURCES})
 
-# Collega OpenCL
-target_link_libraries(OpenCL_cryptography PUBLIC OpenCL)
-target_link_libraries(OpenCL_cryptography PUBLIC Botan::Botan)
+set_target_properties(AES_OpenCL PROPERTIES
+    AUTOMOC ON
+    AUTOUIC ON
+    AUTORCC ON
+)
+qt_standard_project_setup()
+
+# Collega librerie
+# Per eseguire QT è necessario avere nel path il /bin
+target_link_libraries(AES_OpenCL PUBLIC OpenCL)
+target_link_libraries(AES_OpenCL PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
+target_link_libraries(AES_OpenCL PUBLIC Botan::Botan)
 
 # Imposta una variabile per il path alla DLL
 if(NOT DEFINED ENV{Botan_LIB})
@@ -61,19 +75,19 @@ endif()
 
 # Copia i kernels e il dll dopo la build
 # La dll è necessaria sia nella cartella di build che in quella di test
-add_custom_command(TARGET OpenCL_cryptography POST_BUILD
+add_custom_command(TARGET AES_OpenCL POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${BOTAN_DLL_PATH}"
-            $<TARGET_FILE_DIR:OpenCL_cryptography>
+            $<TARGET_FILE_DIR:AES_OpenCL>
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${BOTAN_DLL_PATH}"
-            "$<TARGET_FILE_DIR:OpenCL_cryptography>/tests"
+            "$<TARGET_FILE_DIR:AES_OpenCL>/tests"
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/kernels
-            $<TARGET_FILE_DIR:OpenCL_cryptography>/kernels
+            $<TARGET_FILE_DIR:AES_OpenCL>/kernels
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/kernels
-            "$<TARGET_FILE_DIR:OpenCL_cryptography>/tests/kernels"
+            "$<TARGET_FILE_DIR:AES_OpenCL>/tests/kernels"
 )
 
 # Abilita i test
@@ -86,6 +100,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 # Messaggio finale
-message(STATUS "OpenCL_cryptography configurato")
+message(STATUS "AES_OpenCL configurato")
+message(STATUS "Qt6 version: ${Qt6_VERSION}")
 message(STATUS "Version : ${Botan_VERSION}")
 message(STATUS "Found : ${Botan_FOUND}")
