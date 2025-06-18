@@ -1,0 +1,90 @@
+{
+	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
+	"BUILD_DIR" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/ghash_test_autogen",
+	"CMAKE_BINARY_DIR" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests",
+	"CMAKE_CURRENT_SOURCE_DIR" : "D:/VisualStudio/repos/AES_OpenCL/tests",
+	"CMAKE_EXECUTABLE" : "D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : [ "D:/VisualStudio/repos/AES_OpenCL/tests/CMakeLists.txt" ],
+	"CMAKE_SOURCE_DIR" : "D:/VisualStudio/repos/AES_OpenCL",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/ghash_test_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "ghash_test_autogen/timestamp",
+	"HEADERS" : [],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/ghash_test_autogen/include",
+	"MOC_COMPILATION_FILE" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/ghash_test_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_WIDGETS_LIB",
+		"UNICODE",
+		"WIN32",
+		"WIN64",
+		"_ENABLE_EXTENDED_ALIGNED_STORAGE",
+		"_UNICODE",
+		"_WIN64"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"D:/VisualStudio/repos/AES_OpenCL/src",
+		"D:/VisualStudio/repos/AES_OpenCL/include",
+		"D:/Botan-3.8.1/build-output/include/botan-3",
+		"D:/Qt/6.9.1/msvc2022_64/include/QtCore",
+		"D:/Qt/6.9.1/msvc2022_64/include",
+		"D:/Qt/6.9.1/msvc2022_64/mkspecs/win32-msvc",
+		"D:/Qt/6.9.1/msvc2022_64/include/QtGui",
+		"D:/Qt/6.9.1/msvc2022_64/include/QtWidgets"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : [],
+	"MOC_PREDEFS_FILE" : "",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : 
+	[
+		"D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/speed_test_autogen/mocs_compilation.cpp",
+		"D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/test_enc_autogen/mocs_compilation.cpp",
+		"D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/test_key_autogen/mocs_compilation.cpp"
+	],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/CMakeFiles/ghash_test_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "D:/Qt/6.9.1/msvc2022_64/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "D:/Qt/6.9.1/msvc2022_64/bin/uic.exe",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 9,
+	"SETTINGS_FILE" : "D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/CMakeFiles/ghash_test_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[ "D:/VisualStudio/repos/AES_OpenCL/tests/ghash_test.cpp", "MU", null ]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : 
+	[
+		"D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/speed_test_autogen/mocs_compilation.cpp",
+		"D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/test_enc_autogen/mocs_compilation.cpp",
+		"D:/VisualStudio/repos/AES_OpenCL/out/build/x64-DebugSafe/tests/test_key_autogen/mocs_compilation.cpp"
+	],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

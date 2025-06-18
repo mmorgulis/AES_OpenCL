@@ -1,0 +1,17 @@
+# ninja log v6
+24	54	7719626935001426	D:/VisualStudio/repos/AES_OpenCL/out/build/x64-debug/CMakeFiles/cmake.verify_globs	6092dee7db7fcf54
+95	241	7719626935709766	AES_OpenCL_autogen/timestamp	e2869016bbf1fb8c
+95	241	7719626935709766	AES_OpenCL_autogen/mocs_compilation.cpp	e2869016bbf1fb8c
+95	241	7719626935709766	D:/VisualStudio/repos/AES_OpenCL/out/build/x64-debug/AES_OpenCL_autogen/timestamp	e2869016bbf1fb8c
+95	241	7719626935709766	D:/VisualStudio/repos/AES_OpenCL/out/build/x64-debug/AES_OpenCL_autogen/mocs_compilation.cpp	e2869016bbf1fb8c
+292	3003	7719626937681276	CMakeFiles/AES_OpenCL.dir/src/utils/aes_gcm.cpp.obj	1530abffb1cc9047
+3168	5100	7719626966450821	CMakeFiles/AES_OpenCL.dir/src/utils/ghash.cpp.obj	28eb90b5f7e4a5cf
+281	3229	7719626937570356	CMakeFiles/AES_OpenCL.dir/src/utils/aes_ctr.cpp.obj	1e81e02805d95c73
+271	3168	7719626937480163	CMakeFiles/AES_OpenCL.dir/src/utils/aes_core.cpp.obj	40dfe214fcc1fd96
+250	6114	7719626937263823	CMakeFiles/AES_OpenCL.dir/src/alicewindow.cpp.obj	e7ec827808aecaf7
+305	5107	7719626937816889	CMakeFiles/AES_OpenCL.dir/src/utils/aes_host.cpp.obj	e4ac27a0b9d6b9ab
+3003	5461	7719626964792838	CMakeFiles/AES_OpenCL.dir/src/utils/aes_mode.cpp.obj	9111079c2dc31153
+256	6380	7719626937329520	CMakeFiles/AES_OpenCL.dir/src/bobwindow.cpp.obj	c4c64a90fa8a8247
+243	5734	7719626937193547	CMakeFiles/AES_OpenCL.dir/AES_OpenCL_autogen/mocs_compilation.cpp.obj	ff62cb9e60b02805
+264	5896	7719626937404911	CMakeFiles/AES_OpenCL.dir/src/main.cpp.obj	29f553879809654c
+6380	7238	7719626998564030	AES_OpenCL.exe	cb119200a047c531

@@ -27,7 +27,7 @@ target_link_libraries(ghash_test PRIVATE
 add_test(NAME ghash_test COMMAND ghash_test)
 
 #TEST 5
-add_executable(gcm_test "ghash_test.cpp")
+add_executable(gcm_test "gcm_test.cpp")
 target_link_libraries(gcm_test PRIVATE 
 	OpenCL_crypto_lib
 )  

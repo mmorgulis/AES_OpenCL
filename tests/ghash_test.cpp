@@ -24,10 +24,10 @@ int main() {
     g.compute_ghash(C);
     std::array<uint8_t, 16> ghash = g.get_hash();
     if (ghash == GHASH_expected) {
-        std::cout << "Test Passato" << std::endl;
+        std::cout << "Ghash Corretto" << std::endl;
     }
     else {
-       std::cout << "Test Fallito" << std::endl;
+       std::cout << "Ghash Errato" << std::endl;
        test_failed = 1;
     }
     return test_failed;

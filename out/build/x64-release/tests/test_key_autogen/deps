@@ -1,0 +1,4 @@
+test_key_autogen/timestamp: \
+	D:/VisualStudio/repos/AES_OpenCL/tests/CMakeLists.txt \
+	D:/VisualStudio/repos/AES_OpenCL/tests/key_expansion_test.cpp \
+	D:/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe
