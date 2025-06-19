@@ -1,6 +1,5 @@
 #include <QApplication>
-#include "alicewindow.h"
-#include "bobwindow.h"
+#include <QProcess>
 #include <botan/version.h>
 
 int main(int argc, char* argv[])
@@ -9,12 +8,12 @@ int main(int argc, char* argv[])
     //std::cout << "Botan version: " << Botan::version_string() << std::endl;
     QApplication a(argc, argv);
 
-    AliceWindow alice;
-    BobWindow bob;
+    QProcess alice;
+    QProcess bob;
 
-    alice.show();
-    bob.show();
-
+    // Lancia Alice.exe e Bob.exe (attento ai path corretti)
+    alice.start("Alice.exe");
+    bob.start("Bob.exe");
     
 
     return a.exec();

@@ -1,8 +1,21 @@
-add_library(OpenCL_crypto_lib STATIC ${SOURCES})
+# Colleziona i sorgenti
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
+    "*.cpp" "*.c" "*.h" "*.hpp"
+) 
 
-target_include_directories(OpenCL_crypto_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+list(REMOVE_ITEM SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"           # escludi main comune
+    "${CMAKE_CURRENT_SOURCE_DIR}/Alice/alice_main.cpp"  # escludi main Alice
+    "${CMAKE_CURRENT_SOURCE_DIR}/Bob/bob_main.cpp"      # escludi main Bob
+)
 
-target_link_libraries(OpenCL_crypto_lib
+add_library(AES_OpenCL_lib STATIC ${SOURCES})
+
+target_include_directories(AES_OpenCL_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+
+# Per eseguire QT è necessario avere nel path il /bin
+target_link_libraries(AES_OpenCL_lib
     PUBLIC
     Botan::Botan
     OpenCL
@@ -11,7 +24,7 @@ target_link_libraries(OpenCL_crypto_lib
     Qt6::Widgets
 )
 
-set_target_properties(OpenCL_crypto_lib PROPERTIES
+set_target_properties(AES_OpenCL_lib PROPERTIES
     AUTOMOC ON
     AUTOUIC ON
     AUTORCC ON

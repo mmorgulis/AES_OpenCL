@@ -35,19 +35,11 @@ add_library(OpenCL INTERFACE)
 target_include_directories(OpenCL INTERFACE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(OpenCL INTERFACE ${CMAKE_SOURCE_DIR}/lib/OpenCL.lib)
 
-# Colleziona i sorgenti
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
-    "src/*.cpp"
-    "src/*.hpp"
-    "src/*.h"
-    "include/*.cpp"
-    "include/*.hpp"
-    "include/*.h"
-    "src/*.ui"
-)   
+# Aggiungi la directory del src (per lib)
+add_subdirectory(src)
 
 # Crea l'eseguibile
-add_executable(AES_OpenCL ${SOURCES})
+add_executable(AES_OpenCL src/main.cpp)
 
 set_target_properties(AES_OpenCL PROPERTIES
     AUTOMOC ON
@@ -56,11 +48,8 @@ set_target_properties(AES_OpenCL PROPERTIES
 )
 qt_standard_project_setup()
 
-# Collega librerie
-# Per eseguire QT è necessario avere nel path il /bin
-target_link_libraries(AES_OpenCL PUBLIC OpenCL)
-target_link_libraries(AES_OpenCL PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
-target_link_libraries(AES_OpenCL PUBLIC Botan::Botan)
+# Collega libreria
+target_link_libraries(AES_OpenCL PRIVATE AES_OpenCL_lib)
 
 # Imposta una variabile per il path alla DLL
 if(NOT DEFINED ENV{Botan_LIB})
@@ -93,14 +82,41 @@ add_custom_command(TARGET AES_OpenCL POST_BUILD
 # Abilita i test
 enable_testing()
 
-# Aggiungi la directory del src (per lib)
-add_subdirectory(src)
-
 # Aggiungi la directory dei test
 add_subdirectory(tests)
+
+# Creo altri due eseguibili Bob e Alice
+file(GLOB_RECURSE SOURCES_ALICE CONFIGURE_DEPENDS
+    "src/Alice/*.cpp"
+    "src/Alice/*.h"
+    "src/Alice/*.ui"
+)
+
+file(GLOB_RECURSE SOURCES_BOB CONFIGURE_DEPENDS
+    "src/Bob/*.cpp"
+    "src/Bob/*.h"
+    "src/Bob/*.ui"
+)
+
+add_executable(Alice ${SOURCES_ALICE})
+add_executable(Bob ${SOURCES_BOB})
+
+set_target_properties(Alice PROPERTIES
+    AUTOMOC ON
+    AUTOUIC ON
+    AUTORCC ON
+)
+target_link_libraries(Alice PRIVATE AES_OpenCL_lib)
+
+set_target_properties(Bob PROPERTIES
+    AUTOMOC ON
+    AUTOUIC ON
+    AUTORCC ON
+)
+target_link_libraries(Bob PRIVATE AES_OpenCL_lib)
 
 # Messaggio finale
 message(STATUS "AES_OpenCL configurato")
 message(STATUS "Qt6 version: ${Qt6_VERSION}")
-message(STATUS "Version : ${Botan_VERSION}")
+message(STATUS "Botan Version : ${Botan_VERSION}")
 message(STATUS "Found : ${Botan_FOUND}")
