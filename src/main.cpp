@@ -1,6 +1,8 @@
 #include <QApplication>
 #include <QProcess>
 #include <botan/version.h>
+#include <chrono>
+#include <thread>
 
 int main(int argc, char* argv[])
 {   
@@ -8,8 +10,10 @@ int main(int argc, char* argv[])
     //std::cout << "Botan version: " << Botan::version_string() << std::endl;
     QApplication a(argc, argv);
 
-    QProcess alice;
     QProcess bob;
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    QProcess alice;
+    
 
     // Lancia Alice.exe e Bob.exe (attento ai path corretti)
     alice.start("Alice.exe");

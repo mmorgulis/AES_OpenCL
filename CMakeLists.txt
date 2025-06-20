@@ -23,7 +23,7 @@ if(NOT DEFINED ENV{Botan_DIR})
 endif()
 set(Botan_DIR "$ENV{Botan_DIR}")
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network)
 find_package(Botan REQUIRED)
 #message(STATUS "Prefix ${_Botan_PREFIX}")
 #message(STATUS "Lib ${_Botan_shared_lib}")

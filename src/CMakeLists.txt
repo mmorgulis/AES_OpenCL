@@ -22,6 +22,7 @@ target_link_libraries(AES_OpenCL_lib
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+    Qt6::Network
 )
 
 set_target_properties(AES_OpenCL_lib PROPERTIES

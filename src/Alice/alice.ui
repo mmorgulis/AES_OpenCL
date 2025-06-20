@@ -99,6 +99,9 @@
       </item>
       <item>
        <widget class="QPlainTextEdit" name="message_text">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="font">
          <font>
           <family>Consolas</family>

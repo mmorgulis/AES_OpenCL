@@ -25,6 +25,8 @@ void set_aes_parameters(unsigned int aes_version) {
 		num_round_keys = 15;
 		num_rounds = 14;
 		break;
+	default:
+		throw std::invalid_argument("Invalid key lenght");
 	}
 }
 
