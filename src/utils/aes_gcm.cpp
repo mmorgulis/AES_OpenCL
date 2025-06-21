@@ -42,7 +42,7 @@ void AES_GCM::compute_H0_Y0() {
 
 void AES_GCM::encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> cipher_text) {
 	_ctr.encrypt(plain_text, cipher_text);
-	compute_H0_Y0();
+	compute_H0_Y0(); // only needed for tag
 	_ghash.compute_ghash(cipher_text);
 	_ghash.compute_tag(cipher_text);
 }
@@ -57,12 +57,13 @@ void AES_GCM::encrypt(std::span<const uint8_t> plain_text, std::span<uint8_t> ci
 }
 
 void AES_GCM::encrypt_append_tag(const std::vector<uint8_t> &plain_text, std::vector<uint8_t> &cipher_text) {
+	cipher_text.resize(plain_text.size());
 	_ctr.encrypt(plain_text, cipher_text);
 	compute_H0_Y0();
 	_ghash.compute_ghash(cipher_text);
 	_ghash.compute_tag(cipher_text);
 	std::array<uint8_t, 16> tag = _ghash.get_tag();
-	std::copy(tag.begin(), tag.end(), cipher_text.end());
+	cipher_text.insert(cipher_text.end(), tag.begin(), tag.end());
 }
 
 std::string AES_GCM::encrypt(std::string_view plain_text) {

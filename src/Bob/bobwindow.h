@@ -50,6 +50,8 @@ private:
     Botan::secure_vector<uint8_t> _shared_secret;
 
     crypto::safe_vector<uint8_t> _aes_key;
+    std::vector<uint8_t> _last_message_received;
+    std::string _last_message_decrypted;
     AES_GCM _gcm;
 
     QTcpServer _bob_server; // automatically initialized (no need for pointer)

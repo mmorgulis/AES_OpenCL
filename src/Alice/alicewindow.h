@@ -33,6 +33,8 @@ private slots:
 
     void on_ready_read();
 
+    void on_aes_exchange_button_clicked();
+
 private:
     Ui::Alice *ui;
 
