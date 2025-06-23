@@ -75,7 +75,7 @@ void AliceWindow::on_exchange_button_clicked()
     QByteArray key_array = QByteArray::fromStdString(pub_b64);
     _alice_socket->write(key_array);
 
-    ui->log_line->setText("ECHD Public Key exchanged");
+    ui->log_line->setText("ECHD Key exchange success");
     ui->exchange_button->setEnabled(false);
     ui->aes_exchange_button->setEnabled(true);
 }
@@ -111,7 +111,7 @@ void AliceWindow::on_aes_exchange_button_clicked()
     QByteArray key_ciph_array(reinterpret_cast<const char*>(cipher_key.data()), static_cast<int>(cipher_key.size()));
     _alice_socket->write(key_ciph_array);
 
-    ui->log_line->setText("AES_GCM Public exchanged with Bob");
+    ui->log_line->setText("AES_GCM Key exchange success");
     ui->aes_exchange_button->setEnabled(false);
     ui->message_text->setEnabled(true);
     ui->sendmessage_button->setEnabled(true);
