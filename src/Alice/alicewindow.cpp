@@ -58,7 +58,6 @@ void AliceWindow::on_ready_read() {
         Botan::PK_Key_Agreement ka(_pr_key, _rng, "Raw");
         _shared_secret = ka.derive_key(32, _bob_pb_key->public_value()).bits_of();
 
-        ui->log_line->setText("Key exchange success");
         ++_counter_message;
     }
 }
