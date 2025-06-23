@@ -75,7 +75,7 @@ void AliceWindow::on_exchange_button_clicked()
     QByteArray key_array = QByteArray::fromStdString(pub_b64);
     _alice_socket->write(key_array);
 
-    ui->log_line->setText("ECHD Public Key exchanged with Bob");
+    ui->log_line->setText("ECHD Public Key exchanged");
     ui->exchange_button->setEnabled(false);
     ui->aes_exchange_button->setEnabled(true);
 }
