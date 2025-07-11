@@ -281,7 +281,7 @@ inline uchar16 decrypt_block(uchar16 input, __constant const uchar *round_keys, 
      // First Round
     input = AddRoundKey(input, vload16(NUM_ROUND, round_keys));
 
-    // num_round-1 to 1
+    // num_round to 1
     for (int i = NUM_ROUND - 1; i > 0; --i) {
         input = InvShiftRows(input);
         input = InvSubBytes(input);
