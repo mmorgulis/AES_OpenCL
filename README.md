@@ -38,4 +38,5 @@ gcm.encrypt(plain_text); // Slower, but easier to use
 ## Notes
 - The project is developed using VS2022 and MSCV with CMake build, it has not been tested for other platform/configurations.
 - It uses QT 6.9.1 and Botan 3.8.1, so, to test the project, make sure is all installed and accessible via enviroment variables (e.g. Botan_DIR).
+- The device must have an OpenCL device, otherwise the program crashes.
 - The project is intended for educational and research purposes; it is not production-ready for secure communications.

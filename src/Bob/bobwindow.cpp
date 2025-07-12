@@ -18,7 +18,11 @@ BobWindow::BobWindow(QWidget* parent) :
 
     setWindowTitle("Bob");
     resize(500, 500);
-    move(1200, 500);
+    QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
+    int x = (screenGeometry.width() - width()) / 2;
+    int y = (screenGeometry.height() - height()) / 2;
+    move(x + width()/2, y);
+
     std::string pubkey_pem = Botan::PEM_Code::encode(_pb_key.public_key_bits(), "PUBLIC KEY");
     QString text = QString::fromStdString(pubkey_pem);
     // Evita caratteri di escape

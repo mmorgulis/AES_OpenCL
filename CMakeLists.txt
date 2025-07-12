@@ -57,6 +57,7 @@ if(NOT DEFINED ENV{Botan_LIB})
 endif()
 
 set(BOTAN_DLL_PATH "$ENV{Botan_LIB}/botan-3.dll")
+string(REPLACE "\\" "/" BOTAN_DLL_PATH "${BOTAN_DLL_PATH}")
 
 if(NOT EXISTS "${BOTAN_DLL_PATH}")
   message(FATAL_ERROR "File DLL non trovato: ${BOTAN_DLL_PATH}")
@@ -115,8 +116,29 @@ set_target_properties(Bob PROPERTIES
 )
 target_link_libraries(Bob PRIVATE AES_OpenCL_lib)
 
+# Installa gli eseguibili
+install(TARGETS AES_OpenCL Alice Bob
+    RUNTIME DESTINATION bin
+)
+
+# Installa i kernels
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/kernels"
+        DESTINATION bin
+)
+
+# Installa la DLL di Botan
+install(FILES "${BOTAN_DLL_PATH}"
+        DESTINATION bin
+)
+
+# Installa DLL Qt
+install(CODE "
+  execute_process(COMMAND windeployqt \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/AES_OpenCL.exe)
+  execute_process(COMMAND windeployqt \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/Alice.exe)
+  execute_process(COMMAND windeployqt \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/Bob.exe)
+")
+
 # Messaggio finale
 message(STATUS "AES_OpenCL configurato")
 message(STATUS "Qt6 version: ${Qt6_VERSION}")
 message(STATUS "Botan Version : ${Botan_VERSION}")
-message(STATUS "Found : ${Botan_FOUND}")
