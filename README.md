@@ -34,9 +34,18 @@ std::string plain_text = "...";
 gcm.encrypt(plain_text); // Slower, but easier to use
 ```
 
+## Hardware Requirements
+- A compatible OpenCL is required, it's strongly recommended to use a device with sufficient memory (e.g., **dedicated GPU**), otherwise the program may crash or exit unexpectedly
 
 ## Notes
 - The project is developed using VS2022 and MSCV with CMake build, it has not been tested for other platform/configurations.
-- It uses QT 6.9.1 and Botan 3.8.1, so, to test the project, make sure is all installed and accessible via enviroment variables (e.g. Botan_DIR).
-- The device must have an OpenCL device, otherwise the program crashes.
+- It uses QT 6.9.1 (for MSCV) and Botan 3.8.1, so, to test the project, make sure is all installed and accessible via enviroment variables (for example mine are Botan_DIR: "D:\Botan-3.8.1\build-output\lib\cmake\Botan-3.8.1" and Qt6_DIR_: "D:\Qt\6.9.1\msvc2022_64\lib\cmake\Qt6".
 - The project is intended for educational and research purposes; it is not production-ready for secure communications.
+
+
+## Build for Windows
+Install Botan, Qt, (if you are on VS) Qt Visual Studio Tools and define environment variables;
+1. cmake -S . -B build -DCMAKE_INSTALL_PREFIX=out
+2. cmake --build build --config Release
+3. cmake --install build --config Release
+4. windeployqt out/bin/AES_OpenCL.exe
