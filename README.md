@@ -1,6 +1,6 @@
 # OpenCL_Cryptography
 This is a C++ thesis project that implements an AES encryption algorithm using OpenCL.  
-The four fundamental AES operations — **AddRoundKey**, **SubBytes**, **ShiftRows**, and **MixColumns** — are implemented in row-major form using OpenCL.  
+The four fundamental AES operations â€” **AddRoundKey**, **SubBytes**, **ShiftRows**, and **MixColumns** â€” are implemented in row-major form using OpenCL.  
 The project also supports two modes of operation: **CTR** (implemented in OpenCL) and **GCM**.
 
 Additionally, it features a custom data structure called `safe_vector<T>`, based on `safe_allocator<T>`, designed to improve memory safety and manage sensitive data securely.
@@ -35,7 +35,7 @@ gcm.encrypt(plain_text); // Slower, but easier to use
 ```
 
 ## Hardware Requirements
-- A compatible OpenCL is required, it's strongly recommended to use a device with sufficient memory (e.g., **dedicated GPU**), otherwise the program may crash or exit unexpectedly
+- A compatible OpenCL is required, it's strongly recommended to use a device with sufficient memory (e.g. **dedicated GPU**), otherwise the program may crash or exit unexpectedly
 
 ## Notes
 - The project is developed using VS2022 and MSCV with CMake build, it has not been tested for other platform/configurations.
