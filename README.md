@@ -44,7 +44,7 @@ gcm.encrypt(plain_text); // Slower, but easier to use
 
 
 ## Build for Windows
-Install Botan, Qt, (if you are on VS) Qt Visual Studio Tools and define environment variables;
+Install Botan, Qt, (if you are on VS) Qt Visual Studio Tools and define environment variables.  
 To compile in release mode:
 1. cmake -S . -B build -DCMAKE_INSTALL_PREFIX=out
 2. cmake --build build --config Release
